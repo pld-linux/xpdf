@@ -37,7 +37,7 @@ z zasobów X Wondow.
 %build
 CXXFLAGS="$RPM_OPT_FLAGS -fno-exceptions -fno-rtti"
 export CXXFLAGS 
-%configure \
+%configure2_13 \
 	--with-gzip \
 	--enable-opi
 %{__make}
