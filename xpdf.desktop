@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=xpdf
-Name[sv]=xpdf
 Comment=Views Adobe PDF files
+Comment[de]=PDF-Betrachter
 Comment[pl]=Przegl±darka plików PDF
 Comment[sv]=Visar Adobe PDF-filer
 Exec=xpdf
