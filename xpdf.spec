@@ -113,12 +113,12 @@ CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Graphics/Viewers,%{_pixmapsdir}} \
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}} \
 	$RPM_BUILD_ROOT%{_datadir}/xpdf
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Graphics/Viewers
+install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}
 
@@ -133,7 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/xpdf
 %{_mandir}/man1/xpdf.1*
 %{_mandir}/man5/xpdfrc.5*
-%{_applnkdir}/Graphics/Viewers/*
+%{_desktopdir}/*
 %{_pixmapsdir}/*
 
 %files tools
