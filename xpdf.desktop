@@ -11,5 +11,5 @@ Exec=xpdf
 Terminal=false
 Type=Application
 MimeType=application/pdf
-Categories=Application;Graphics;Viewer;
+Categories=Graphics;Viewer;
 # vi: encoding=utf-8
