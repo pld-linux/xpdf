@@ -75,16 +75,19 @@ fontDir			/usr/share/fonts/TTF
 
 #textEOL		unix
 
+#textPageBreaks		no
+
 #----- misc settings
 
 # Set the anti-aliasing mode for t1lib and FreeType.  These can be low
 # or high (anti-aliasing), plain (no anti-aliasing), or none (disable
 # the rasterizer entirely).
 
-#t1libControl		high
-#freetypeControl	high
+#enableT1lib		yes
+#enableFreeType		yes
+#antialias		yes
 
 # Set the command used to run a web browser when a URL hyperlink is
 # clicked.
 
-urlCommand		"xterm -e lynx %s"
+urlCommand		"xterm -name xterm.lynx -e lynx %s"
