@@ -62,14 +62,14 @@ ou Xt.
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
-export CXXFLAGS
-%configure2_13 \
+%configure \
 	--with-gzip \
-    --enable-a4-paper \
+	--enable-a4-paper \
 	--enable-opi \
 	--enable-freetype2 \
 	--with-freetype2-includes=/usr/include/freetype2 \
 	--with-freetype-includes=/usr/include/freetype
+
 %{__make}
 
 %install
