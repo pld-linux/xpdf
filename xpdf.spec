@@ -10,8 +10,8 @@ Summary(pt_BR):	Visualizador de arquivos PDF
 Summary(ru):	Программа для просмотра PDF файлов
 Summary(uk):	Програма для перегляду PDF файл╕в
 Name:		xpdf
-Version:	1.01
-Release:	6
+Version:	2.00
+Release:	0.1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
@@ -22,6 +22,7 @@ Patch0:		%{name}-remove_protections.patch
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
 BuildRequires:	XFree86-devel
+BuildRequires:	motif-devel
 BuildRequires:	freetype-devel >= 2.0.6
 BuildRequires:	libstdc++-devel
 BuildRequires:	t1lib-devel >= 1.3.0
@@ -29,6 +30,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Provides:	pdftops
 Obsoletes:	pdftohtml-pdftops
 
+%define         _noautoreqdep   libXm.so.1
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
 
