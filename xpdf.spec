@@ -1,20 +1,21 @@
 Summary:	Portable Document Format (PDF) file viewer
 Summary(pl):	Przegl±darka plików w formacie PDF
 Name:		xpdf
-Version:	0.80
-Release:	7
+Version:	0.90
+Release:	1
 Group:		X11/Applications
 Group(pl):	X11/Aplikacje
 Copyright:	freeware
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tgz
 Source1:	xpdf.desktop
-Patch0:		ftp://ftp.sci.usq.edu.au/pub/linux/xpdf/xpdf-0.80-decrypt.patch
+Patch0:		http://www.fefe.de/xpdf-0.90-fefe-diff2.gz
 Patch1:		xpdf-DESTDIR.patch
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
 BuildRequires:	libstdc++-devel
 BuildRequires:	xpm-devel
 BuildRequires:	XFree86-devel
+BuildRequires:	t1lib-devel
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %define 	_prefix		/usr/X11R6
@@ -41,7 +42,7 @@ komputer klasy PC 486-66 z Linuxem na pok³adzie.
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" 
-CXXFLAGS="$RPM_OPT_FLAGS" 
+CXXFLAGS="$RPM_OPT_FLAGS -fno-exceptions -fno-rtti" 
 LDFLAGS="-s"
 export CFLAGS CXXFLAGS LDFLAGS
 %configure \
