@@ -1,14 +1,14 @@
 Summary:	Portable Document Format (PDF) file viewer
 Summary(pl):	Przegl±darka plików w formacie PDF
 Name:		xpdf
-Version:	0.91
+Version:	0.92
 Release:	1
 License:	GPL
 Group:		X11/Applications
+Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tgz
 Source1:	%{name}.desktop
-Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
 BuildRequires:	libstdc++-devel
@@ -33,13 +33,10 @@ z zasobów X Wondow.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
-CFLAGS="$RPM_OPT_FLAGS"
 CXXFLAGS="$RPM_OPT_FLAGS -fno-exceptions -fno-rtti"
-LDFLAGS="-s"
-export CFLAGS CXXFLAGS LDFLAGS
+export CXXFLAGS 
 %configure \
 	--with-gzip \
 	--enable-opi
@@ -47,7 +44,6 @@ export CFLAGS CXXFLAGS LDFLAGS
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 install -d $RPM_BUILD_ROOT/{%{_bindir},%{_mandir}/man1} \
 	$RPM_BUILD_ROOT%{_applnkdir}/Graphics/Viewers
 
@@ -55,8 +51,7 @@ install -d $RPM_BUILD_ROOT/{%{_bindir},%{_mandir}/man1} \
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Graphics/Viewers/xpdf.desktop
 
-gzip -9nf ANNOUNCE CHANGES README \
-	$RPM_BUILD_ROOT%{_mandir}/man1/*
+gzip -9nf ANNOUNCE CHANGES README
 
 %clean
 rm -rf $RPM_BUILD_ROOT
