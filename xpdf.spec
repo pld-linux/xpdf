@@ -25,13 +25,13 @@ Patch2:		%{name}-nonumericlocale.patch
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
 BuildRequires:	XFree86-devel
-BuildRequires:	motif-devel
 BuildRequires:	freetype-devel >= 2.0.6
 BuildRequires:	libstdc++-devel
+BuildRequires:	motif-devel
 BuildRequires:	t1lib-devel >= 1.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define         _noautoreqdep   libXm.so.1 libXm.so.2
+%define		_noautoreqdep	libXm.so.1 libXm.so.2
 
 %description
 Xpdf is an X Window System based viewer for Portable Document Format
@@ -44,7 +44,7 @@ which uses standard X fonts.
 Xpdf es un visor de archivos PDF (Portable Document Format). (Estos
 son algunas veces llamados de archivos 'Acrobat', nombre del software
 PDF del Adobe. Xpdf fue proyectado para ser pequeÒo y eficiente. Usa
-fuentes padrÛn X y no necesita de las bibliotecas Motif el Xt.
+fuentes padrÛn X.
 
 %description -l ja
 xpdf §œ Portable Document Format (PDF) •’•°•§•Î§Œ X Window System
@@ -57,16 +57,14 @@ xpdf §œ Portable Document Format (PDF) •’•°•§•Î§Œ X Window System
 %description -l pl
 Xpdf jest przegl±dark± plikÛw zapisanych w formacie PDF (Portable
 Document Format). Xpdf jest zaprojektowany tak, by byÊ ma≥ym i
-wydajnym programem. Nie korzysta z bibliotek Motif czy Xt, uøywa
-fontÛw z zasobÛw X Window.
+wydajnym programem. Uøywa fontÛw z zasobÛw X Window.
 %{?_without_protections:Ta wersja ignoruje blokady zarÛwno drukowania jak i kopiowania.}
 
 %description -l pt_BR
 Xpdf È um visualizador de arquivos PDF (Portable Document Format).
 (Estes s„o algumas vezes chamados de arquivos 'Acrobat', nome do
 software PDF da Adobe. Xpdf foi projetado para ser pequeno e
-eficiente. Ele usa fontes padr„o X e n„o precisa das bibliotecas Motif
-ou Xt.
+eficiente. Ele usa fontes padr„o X.
 
 %description -l ru
 Xpdf - ‹‘œ –“œ«“¡ÕÕ¡ ƒÃ— –“œ”Õœ‘“¡ ∆¡ Ãœ◊ ◊ ∆œ“Õ¡‘≈ Portable Document
