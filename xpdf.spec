@@ -5,7 +5,7 @@ Version:	0.90
 Release:	1
 Group:		X11/Applications
 Group(pl):	X11/Aplikacje
-Copyright:	freeware
+License:	GPL
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tgz
 Source1:	xpdf.desktop
 Patch0:		http://www.fefe.de/xpdf-0.90-fefe-diff2.gz
@@ -22,18 +22,15 @@ BuildRoot:	/tmp/%{name}-%{version}-root
 %define 	_mandir 	%{_prefix}/man
 
 %description
-Xpdf is a viewer for Portable Document Format (PDF) files.  (These are also
-sometimes also called 'Acrobat' files, from the name of Adobe's PDF
-software.) Xpdf is designed to be small and efficient.  It does not use the
-Motif or Xt libraries.  It uses standard X fonts.  Xpdf is quite usable on a
-486-66 PC running Linux.
+Xpdf is an X Window System based viewer for Portable Document Format (PDF)
+files. PDF files are sometimes called Acrobat files, after Adobe Acrobat
+(Adobe's PDF viewer). Xpdf is a small and efficient program which uses
+standard X fonts.
 
 %description -l pl
-Xpdf jest przegl±dark± plików zapisanych w formacie PDF (nazywanych równie¿
-czasami plikami 'Acrobata', od nazwy programu firmy Adobe). Xpdf jest 
-zaprojektowany tak, by byæ ma³ym i wydajnym. Nie u¿ywa bibliotek Motif czy Xt.
-Wykorzystuje standardowe czcionki ¶rodowiska X. By móc u¿ywaæ Xpdf wystarczy
-komputer klasy PC 486-66 z Linuxem na pok³adzie.
+Xpdf jest przegl±dark± plików zapisanych w formacie PDF (Portable Document
+Format). Xpdf jest zaprojektowany tak, by byæ ma³ym i wydajnym programem.
+Nie u¿ywa bibliotek Motif czy Xt u¿ywaj±cym fontów z zasobów X Wondow.
 
 %prep
 %setup -q
@@ -41,8 +38,8 @@ komputer klasy PC 486-66 z Linuxem na pok³adzie.
 %patch1 -p0
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" 
-CXXFLAGS="$RPM_OPT_FLAGS -fno-exceptions -fno-rtti" 
+CFLAGS="$RPM_OPT_FLAGS"
+CXXFLAGS="$RPM_OPT_FLAGS -fno-exceptions -fno-rtti"
 LDFLAGS="-s"
 export CFLAGS CXXFLAGS LDFLAGS
 %configure \
