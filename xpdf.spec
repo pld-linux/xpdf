@@ -2,7 +2,7 @@ Summary:	Portable Document Format (PDF) file viewer
 Summary(pl):	Przegl±darka plików w formacie PDF
 Name:		xpdf
 Version:	0.90
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications
 Group(pl):	X11/Aplikacje
@@ -22,15 +22,16 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define 	_mandir 	%{_prefix}/man
 
 %description
-Xpdf is an X Window System based viewer for Portable Document Format (PDF)
-files. PDF files are sometimes called Acrobat files, after Adobe Acrobat
-(Adobe's PDF viewer). Xpdf is a small and efficient program which uses
-standard X fonts.
+Xpdf is an X Window System based viewer for Portable Document Format
+(PDF) files. PDF files are sometimes called Acrobat files, after Adobe
+Acrobat (Adobe's PDF viewer). Xpdf is a small and efficient program
+which uses standard X fonts.
 
 %description -l pl
-Xpdf jest przegl±dark± plików zapisanych w formacie PDF (Portable Document
-Format). Xpdf jest zaprojektowany tak, by byæ ma³ym i wydajnym programem.
-Nie u¿ywa bibliotek Motif czy Xt u¿ywaj±cym fontów z zasobów X Wondow.
+Xpdf jest przegl±dark± plików zapisanych w formacie PDF (Portable
+Document Format). Xpdf jest zaprojektowany tak, by byæ ma³ym i
+wydajnym programem. Nie u¿ywa bibliotek Motif czy Xt u¿ywaj±cym fontów
+z zasobów X Wondow.
 
 %prep
 %setup -q
@@ -50,11 +51,11 @@ make
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/{%{_bindir},%{_mandir}/man1} \
-	$RPM_BUILD_ROOT%{_datadir}/applnk/Graphics/Viewers
+	$RPM_BUILD_ROOT%{_applnkdir}/Graphics/Viewers
 
 make DESTDIR=$RPM_BUILD_ROOT install
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/applnk/Graphics/Viewers/xpdf.desktop
+install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Graphics/Viewers/xpdf.desktop
 
 gzip -9nf ANNOUNCE CHANGES README \
 	$RPM_BUILD_ROOT%{_mandir}/man1/*
@@ -67,4 +68,4 @@ rm -rf $RPM_BUILD_ROOT
 %doc {ANNOUNCE,CHANGES,README}.gz
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
-%{_datadir}/applnk/Graphics/Viewers/*
+%{_applnkdir}/Graphics/Viewers/*
