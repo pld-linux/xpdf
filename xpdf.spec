@@ -14,7 +14,7 @@ URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
 BuildRoot:	/tmp/%{name}-%{version}-root
 
-%define _prefix		/usr/X11R6
+%define _prefix	/usr/X11R6
 
 %description
 Xpdf is a viewer for Portable Document Format (PDF) files.  (These are also
@@ -68,51 +68,8 @@ rm -rf $RPM_BUILD_ROOT
 /etc/X11/applnk/Graphics/Viewers/*
 
 %changelog
-* Tue May 11 1999 Piotr Czerwiñski <pius@pld.org.pl> 
+* Thu May 20 1999 Piotr Czerwiñski <pius@pld.org.pl> 
   [0.80-7]
-- package is FHS 2.0 compliant.
-
-* Wed Apr 21 1999 Piotr Czerwiñski <pius@pld.org.pl>
-  [0.80-6]
-- recompiled on rpm 3.
-
-* Thu Apr  1 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.80-5]
-- added ftp://ftp.sci.usq.edu.au/pub/linux/xpdf/xpdf-0.80-decrypt.patch for
-  crypted PDF files,
-- added LDFLAGS="-s" to ./configure enviroment,
-- added package icon,
-- applnk file instead wmconfig.
-
-* Thu Apr  1 1999 Piotr Czerwiñski <pius@pld.org.pl>
-- changed BuildRoot to /tmp/%%{name}-%%{version}-root,
-- added pl translation,
-- added -q %setup parameter,
-- simplifications in %install,
-- added gzipping documentation,
-- rewritten %files,
-- added full %defattr description,
-- moved %changelog at the end of spec,
-- major changes.
-
-* Sun Mar 15 1998 Joel Young <jyoung@erols.com>
-- modified to use BuildRoot, %attr, to gzip the manpages, and moved
-  into the X11R6 hierarchy (since it is an X app).
-- released as new version with go-ahead from Michal Jaegermann
-
-* Thu Mar 12 1998 Michal Jaegermann <michal@ellpspace.math.ualberta.ca>
-- corrections to Type3 fonts handling code from the author
-  (Derek B. Noonburg <derekn@aimnet.com>) remove a need for -mieee
-  workaround
-
-* Thu Mar  5 1998 Michal Jaegermann <michal@ellpspace.math.ualberta.ca>
-- recompiled from a new release 0-7a including xpdf-0.7a-patch1 for
-  Makefiles from the author.
-- added -mieee to compilation flags to avoid Alpha floating point problems
-
-* Wed Feb 18 1998 Michal Jaegermann <michal@ellpspace.math.ualberta.ca>
-- fixed off-by-one error in Stream.cc; nasty stack kill on Alpha
-
-* Thu Nov 20 1997 Otto Hammersmith <otto@redhat.com>
-- added changelog
-- added wmconfig
+- package is FHS 2.0 compliant,
+- based on spec file by Joel Young <jyoung@erols.com>; 
+  rewritten for PLD use by me and Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>.
