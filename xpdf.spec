@@ -3,6 +3,8 @@ Summary(es):	Visualizador de archivos PDF
 Summary(ja):	X Window System ╓г╓н PDF ╔у╔║╔╓╔К╔Т╔Е║╪╔╒
 Summary(pl):	Przegl╠darka plikСw w formacie PDF
 Summary(pt_BR):	Visualizador de arquivos PDF
+Summary(ru):	Программа для просмотра PDF файлов
+Summary(uk):	Програма для перегляду PDF файл╕в
 Name:		xpdf
 Version:	1.01
 Release:	1
@@ -57,6 +59,16 @@ software PDF da Adobe. Xpdf foi projetado para ser pequeno e
 eficiente. Ele usa fontes padrЦo X e nЦo precisa das bibliotecas Motif
 ou Xt.
 
+%description -l ru
+Xpdf - это программа для просмотра файлов в формате Portable Document
+Format (PDF). Она быстрая и эффективная и использует стандартные
+шрифты X Window.
+
+%description -l uk
+Xpdf - це програма для перегляду файл╕в в формат╕ Portable Document
+Format (PDF). Вона швидка й ефективна та використову╓ стандартн╕
+шрифти X Window.
+
 %prep
 %setup -q
 
@@ -81,7 +93,6 @@ install -d $RPM_BUILD_ROOT/{%{_bindir},%{_mandir}/man1} \
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Graphics/Viewers/xpdf.desktop
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
-
 
 %clean
 rm -rf $RPM_BUILD_ROOT
