@@ -30,8 +30,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Provides:	pdftops
 Obsoletes:	pdftohtml-pdftops
 
-%define         _noautoreqdep   libXm.so.1
-%define         _noautoreqdep   libXm.so.2
+%define         _noautoreqdep   libXm.so.1 libXm.so.2
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
 
