@@ -1,6 +1,6 @@
 #
 # Conditional build:
-# _without_protections	- remove protections against fair use (printing and copying)
+%bcond_without	protections	# remove protections against fair use (printing and copying)
 #
 Summary:	Portable Document Format (PDF) file viewer
 Summary(es):	Visualizador de archivos PDF
@@ -10,18 +10,19 @@ Summary(pt_BR):	Visualizador de arquivos PDF
 Summary(ru):	“œ«“¡ÕÕ¡ ƒÃ— –“œ”Õœ‘“¡ PDF ∆¡ Ãœ◊
 Summary(uk):	“œ«“¡Õ¡ ƒÃ— –≈“≈«Ã—ƒ’ PDF ∆¡ Ã¶◊
 Name:		xpdf
-Version:	2.02pl1
-Release:	1
+Version:	3.00
+Release:	5
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
-# Source0-md5:	e2932bb0f844d8318c940350c2aa2eb6
+# Source0-md5:	95294cef3031dd68e65f331e8750b2c2
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}rc
 Patch0:		%{name}-remove_protections.patch
 # official security fix
 Patch1:		%{name}-nonumericlocale.patch
+Patch2:		%{name}-intoverflow.patch
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
 BuildRequires:	XFree86-devel
@@ -40,7 +41,7 @@ Xpdf is an X Window System based viewer for Portable Document Format
 (PDF) files. PDF files are sometimes called Acrobat files, after Adobe
 Acrobat (Adobe's PDF viewer). Xpdf is a small and efficient program
 which uses standard X fonts.
-%{?_without_protections:This version ignores protections for both: printing and copying.}
+%{!?with_protections:This version ignores protections for both: printing and copying.}
 
 %description -l es
 Xpdf es un visor de archivos PDF (Portable Document Format). (Estos
@@ -60,7 +61,7 @@ xpdf §œ Portable Document Format (PDF) •’•°•§•Î§Œ X Window System
 Xpdf jest przegl±dark± plikÛw zapisanych w formacie PDF (Portable
 Document Format). Xpdf jest zaprojektowany tak, by byÊ ma≥ym i
 wydajnym programem. Uøywa fontÛw z zasobÛw X Window.
-%{?_without_protections:Ta wersja ignoruje blokady zarÛwno drukowania jak i kopiowania.}
+%{!?with_protections:Ta wersja ignoruje blokady zarÛwno drukowania jak i kopiowania.}
 
 %description -l pt_BR
 Xpdf È um visualizador de arquivos PDF (Portable Document Format).
@@ -97,8 +98,9 @@ pdftops, pdftotext).
 
 %prep
 %setup -q
-%{?_without_protections:%patch0 -p1}
-%patch1 -p1
+%{!?with_protections:%patch0 -p1}
+#%patch1 -p1
+%patch2 -p1
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
@@ -107,6 +109,8 @@ CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 	--enable-a4-paper \
 	--enable-opi \
 	--enable-freetype2 \
+	--enable-multithreaded \
+	--enable-wordlist \
 	--with-freetype2-includes=/usr/include/freetype2 \
 	--with-freetype-includes=/usr/include/freetype \
 	--with-Xm-includes=/usr/X11R6/include
