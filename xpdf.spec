@@ -45,7 +45,7 @@ LDFLAGS="-s"
 export CFLAGS CXXFLAGS LDFLAGS
 %configure \
 	--with-gzip
-make
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
