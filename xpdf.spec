@@ -2,10 +2,10 @@ Summary:	Portable Document Format (PDF) file viewer
 Summary(pl):	Przegl±darka plików w formacie PDF
 Name:		xpdf
 Version:	0.90
-Release:	1
+Release:	2
+License:	GPL
 Group:		X11/Applications
 Group(pl):	X11/Aplikacje
-License:	GPL
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tgz
 Source1:	xpdf.desktop
 Patch0:		http://www.fefe.de/xpdf-0.90-fefe-diff2.gz
@@ -15,7 +15,7 @@ Icon:		xpdfIcon.gif
 BuildRequires:	libstdc++-devel
 BuildRequires:	xpm-devel
 BuildRequires:	XFree86-devel
-BuildRequires:	t1lib-devel
+BuildRequires:	t1lib-devel >= 1.0.0
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %define 	_prefix		/usr/X11R6
