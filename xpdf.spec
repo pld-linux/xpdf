@@ -4,7 +4,7 @@ Summary(ja):	X Window System 匹及 PDF 白央奶伙任亙□失
 Summary(pl):	Przegl康arka plik闚 w formacie PDF
 Summary(pt_BR):	Visualizador de arquivos PDF
 Name:		xpdf
-Version:	0.93
+Version:	1.00
 Release:	1
 License:	GPL
 Group:		X11/Applications
