@@ -8,10 +8,13 @@ Group(pl):	X11/Aplikacje
 Copyright:	freeware
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tgz
 Source1:	xpdf.desktop
-Patch:		ftp://ftp.sci.usq.edu.au/pub/linux/xpdf/xpdf-0.80-decrypt.patch
+Patch0:		ftp://ftp.sci.usq.edu.au/pub/linux/xpdf/xpdf-0.80-decrypt.patch
+Patch1:		xpdf-DESTDIR.patch
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
 BuildRoot:	/tmp/%{name}-%{version}-root
+
+%define _prefix		/usr/X11R6
 
 %description
 Xpdf is a viewer for Portable Document Format (PDF) files.  (These are also
@@ -29,28 +32,30 @@ komputer klasy PC 486-66 z Linuxem na pok³adzie.
 
 %prep
 %setup -q
-%patch -p1
+%patch0 -p1
+%patch1 -p0
 
 %build
-autoconf
 CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure %{_target} \
-	--prefix=/usr/X11R6 \
+./configure %{_target_platform} \
+	--prefix=%{_prefix} \
+	--bindir=%{_bindir} \
+	--mandir=%{_mandir} \
 	--with-gzip
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{usr/X11R6/{bin,share/man/man1} \
-	$RPM_BUILD_ROOT/etc/X11/applnk/Applications
+install -d $RPM_BUILD_ROOT/{%{_bindir},%{_mandir}/man1} \
+	$RPM_BUILD_ROOT/etc/X11/applnk/Graphics/Viewers
 
-make prefix=$RPM_BUILD_ROOT/usr/X11R6 install
+make DESTDIR=$RPM_BUILD_ROOT install
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/applnk/Applications/xpdf.desktop
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/applnk/Graphics/Viewers/xpdf.desktop
 
 gzip -9nf ANNOUNCE CHANGES README \
-	$RPM_BUILD_ROOT/usr/X11R6/share/man/man1/*
+	$RPM_BUILD_ROOT%{_mandir}/man1/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -58,9 +63,9 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc {ANNOUNCE,CHANGES,README}.gz
-%attr(755,root,root) /usr/X11R6/bin/*
-/usr/X11R6/share/man/man1/*
-/etc/X11/applnk/Applications/*
+%attr(755,root,root) %{_bindir}/*
+%{_mandir}/man1/*
+/etc/X11/applnk/Graphics/Viewers/*
 
 %changelog
 * Tue May 11 1999 Piotr Czerwiñski <pius@pld.org.pl> 
