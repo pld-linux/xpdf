@@ -52,11 +52,11 @@ make
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/{%{_bindir},%{_mandir}/man1} \
-	$RPM_BUILD_ROOT/etc/X11/applnk/Graphics/Viewers
+	$RPM_BUILD_ROOT/usr/X11R6/share/applnk/Graphics/Viewers
 
 make DESTDIR=$RPM_BUILD_ROOT install
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/applnk/Graphics/Viewers/xpdf.desktop
+install %{SOURCE1} $RPM_BUILD_ROOT/usr/X11R6/share/applnk/Graphics/Viewers/xpdf.desktop
 
 gzip -9nf ANNOUNCE CHANGES README \
 	$RPM_BUILD_ROOT%{_mandir}/man1/*
@@ -69,4 +69,4 @@ rm -rf $RPM_BUILD_ROOT
 %doc {ANNOUNCE,CHANGES,README}.gz
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
-/etc/X11/applnk/Graphics/Viewers/*
+/usr/X11R6/share/applnk/Graphics/Viewers/*
