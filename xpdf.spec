@@ -13,8 +13,6 @@ Source1:	%{name}.desktop
 Source2:	%{name}.png
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
-BuildRequires:	autoconf
-BuildRequires:	automake
 BuildRequires:	libstdc++-devel
 BuildRequires:	XFree86-devel
 BuildRequires:	t1lib-devel >= 1.0.0
@@ -47,11 +45,9 @@ z zasobów X Window.
 %setup -q
 
 %build
-aclocal
-autoconf
 CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 export CXXFLAGS 
-%configure \
+%configure2_13 \
 	--with-gzip \
 	--enable-opi
 %{__make}
