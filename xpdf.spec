@@ -91,16 +91,12 @@ Zestaw programów do wy¶wietlania informacji o plikach PDF (pdfinfo,
 pdffonts, pdfimages) i konwertowania ich do innych formatów (pdftopbm,
 pdftops, pdftotext).
 
-
 %prep
 %setup -q
 %{?_without_protections:%patch0 -p1}
 %patch1 -p1
 
 %build
-newoptflags="%{optflags} -fomit-frame-pointer"
-%define optflags $newoptflags
-
 CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 %configure \
 	--with-gzip \
