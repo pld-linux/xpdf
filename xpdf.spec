@@ -11,7 +11,7 @@ Summary(ru):	Программа для просмотра PDF файлов
 Summary(uk):	Програма для перегляду PDF файл╕в
 Name:		xpdf
 Version:	2.00
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
@@ -91,7 +91,8 @@ CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 	--enable-opi \
 	--enable-freetype2 \
 	--with-freetype2-includes=/usr/include/freetype2 \
-	--with-freetype-includes=/usr/include/freetype
+	--with-freetype-includes=/usr/include/freetype \
+	--with-Xm-includes=/usr/X11R6/include
 
 %{__make}
 
