@@ -14,6 +14,7 @@ Version:	2.02
 Release:	1
 License:	GPL
 Group:		X11/Applications
+#Source0-md5:	fb54402d98fb834e5778163cfc238b44
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Source2:	%{name}.png
