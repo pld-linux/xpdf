@@ -5,7 +5,7 @@ Summary(pl):	Przegl±darka plików w formacie PDF
 Summary(pt_BR):	Visualizador de arquivos PDF
 Name:		xpdf
 Version:	1.00
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
@@ -18,6 +18,7 @@ BuildRequires:	XFree86-devel
 BuildRequires:	t1lib-devel >= 1.3.0
 BuildRequires:	freetype-devel >= 2.0.6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Provides:	pdftops
 
 %define 	_prefix		/usr/X11R6
 %define 	_mandir 	%{_prefix}/man
