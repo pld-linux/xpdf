@@ -13,7 +13,7 @@ Patch1:		xpdf-DESTDIR.patch
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
 BuildPrereq:	libstdc++-devel
-BuildPrereq:	xpm-devel.
+BuildPrereq:	xpm-devel
 BuildPrereq:	XFree86-devel
 BuildRoot:	/tmp/%{name}-%{version}-root
 
