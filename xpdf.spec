@@ -32,8 +32,6 @@ BuildRequires:	t1lib-devel >= 1.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define         _noautoreqdep   libXm.so.1 libXm.so.2
-%define		_prefix		/usr/X11R6
-%define		_mandir		%{_prefix}/man
 
 %description
 Xpdf is an X Window System based viewer for Portable Document Format
