@@ -2,8 +2,8 @@ Summary:	Portable Document Format (PDF) file viewer
 Summary(ja):	X Window System 匹及 PDF 白央奶伙任亙□失
 Summary(pl):	Przegl康arka plik闚 w formacie PDF
 Name:		xpdf
-Version:	0.92
-Release:	6
+Version:	0.93
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
@@ -16,6 +16,7 @@ Icon:		xpdfIcon.gif
 BuildRequires:	libstdc++-devel
 BuildRequires:	XFree86-devel
 BuildRequires:	t1lib-devel >= 1.0.0
+BuildRequires:	freetype-devel >= 2.0.5
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	_prefix		/usr/X11R6
@@ -49,7 +50,10 @@ CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 export CXXFLAGS 
 %configure2_13 \
 	--with-gzip \
-	--enable-opi
+	--enable-opi \
+	--enable-freetype2 \
+	--with-freetype2-includes=/usr/include/freetype2 \
+	--with-freetype-includes=/usr/include/freetype
 %{__make}
 
 %install
