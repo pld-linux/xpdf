@@ -7,15 +7,16 @@ Summary(ru):	Программа для просмотра PDF файлов
 Summary(uk):	Програма для перегляду PDF файл╕в
 Name:		xpdf
 Version:	1.01
-Release:	5
+Release:	6
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}rc
-URL:		http://www.foolabs.com/xpdf/
+Patch0:		ftp://ftp.foolabs.com/pub/xpdf/xpdf-2.01-patch1
 Icon:		xpdfIcon.gif
+URL:		http://www.foolabs.com/xpdf/
 BuildRequires:	XFree86-devel
 BuildRequires:	freetype-devel >= 2.0.6
 BuildRequires:	libstdc++-devel
@@ -72,6 +73,8 @@ Format (PDF). Вона швидка й ефективна та використову╓ стандартн╕
 
 %prep
 %setup -q
+cd xpdf
+%patch0 -p0
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
