@@ -40,11 +40,11 @@ komputer klasy PC 486-66 z Linuxem na pok³adzie.
 %patch1 -p0
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure %{_target_platform} \
-	--prefix=%{_prefix} \
-	--bindir=%{_bindir} \
-	--mandir=%{_mandir} \
+CFLAGS="$RPM_OPT_FLAGS" 
+CXXFLAGS="$RPM_OPT_FLAGS" 
+LDFLAGS="-s"
+export CFLAGS CXXFLAGS LDFLAGS
+%configure \
 	--with-gzip
 make
 
@@ -52,11 +52,11 @@ make
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT/{%{_bindir},%{_mandir}/man1} \
-	$RPM_BUILD_ROOT/usr/X11R6/share/applnk/Graphics/Viewers
+	$RPM_BUILD_ROOT%{_datadir}/applnk/Graphics/Viewers
 
 make DESTDIR=$RPM_BUILD_ROOT install
 
-install %{SOURCE1} $RPM_BUILD_ROOT/usr/X11R6/share/applnk/Graphics/Viewers/xpdf.desktop
+install %{SOURCE1} $RPM_BUILD_ROOT%{_datadir}/applnk/Graphics/Viewers/xpdf.desktop
 
 gzip -9nf ANNOUNCE CHANGES README \
 	$RPM_BUILD_ROOT%{_mandir}/man1/*
@@ -69,4 +69,4 @@ rm -rf $RPM_BUILD_ROOT
 %doc {ANNOUNCE,CHANGES,README}.gz
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
-/usr/X11R6/share/applnk/Graphics/Viewers/*
+%{_datadir}/applnk/Graphics/Viewers/*
