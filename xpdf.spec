@@ -70,10 +70,3 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
 /etc/X11/applnk/Graphics/Viewers/*
-
-%changelog
-* Thu May 20 1999 Piotr Czerwiñski <pius@pld.org.pl> 
-  [0.80-7]
-- package is FHS 2.0 compliant,
-- based on spec file by Joel Young <jyoung@erols.com>; 
-  rewritten for PLD use by me and Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>.
