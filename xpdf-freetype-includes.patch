@@ -1,0 +1,108 @@
+--- xpdf-3.00/splash/SplashFTFont.h.orig	2004-01-22 02:26:44.000000000 +0100
++++ xpdf-3.00/splash/SplashFTFont.h	2004-01-25 15:39:34.963768272 +0100
+@@ -15,7 +15,8 @@
+ #pragma interface
+ #endif
+ 
+-#include <freetype/freetype.h>
++#include <ft2build.h>
++#include FT_FREETYPE_H
+ #include "SplashFont.h"
+ 
+ class SplashFTFontFile;
+--- xpdf-3.00/splash/SplashFTFontEngine.h.orig	2004-01-22 02:26:44.000000000 +0100
++++ xpdf-3.00/splash/SplashFTFontEngine.h	2004-01-25 15:39:49.048627048 +0100
+@@ -15,7 +15,8 @@
+ #pragma interface
+ #endif
+ 
+-#include <freetype/freetype.h>
++#include <ft2build.h>
++#include FT_FREETYPE_H
+ #include "gtypes.h"
+ 
+ class SplashFontFile;
+--- xpdf-3.00/splash/SplashFTFontFile.h.orig	2004-01-22 02:26:44.000000000 +0100
++++ xpdf-3.00/splash/SplashFTFontFile.h	2004-01-25 15:40:03.926365288 +0100
+@@ -15,7 +15,8 @@
+ #pragma interface
+ #endif
+ 
+-#include <freetype/freetype.h>
++#include <ft2build.h>
++#include FT_FREETYPE_H
+ #include "SplashFontFile.h"
+ 
+ class SplashFontFileID;
+--- xpdf-3.00/configure.in.orig	2004-01-22 02:26:44.000000000 +0100
++++ xpdf-3.00/configure.in	2004-01-25 15:39:06.840043728 +0100
+@@ -305,12 +305,11 @@
+ dnl ##### Check for FreeType 2.x.
+ dnl ##### (Note: FT_Get_Name_Index was added in FT 2.0.5, and is
+ dnl ##### the reason that Xpdf requires 2.0.5+.)
+-smr_CHECK_LIB(freetype2, freetype, [FreeType2 font rasterizer - version 2.0.5+],
+-              FT_Get_Name_Index, freetype/freetype.h, -lm)
+-if test x"$freetype2_LIBS" = x; then
+-  smr_CHECK_LIB(freetype2, freetype, [FreeType2 font rasterizer - version 2.0.5+],
+-                FT_Get_Name_Index, freetype.h, -lm)
+-fi
++smr_CHECK_LIB(freetype2, freetype, [FreeType2 font rasterizer - version 2.1.0+],
++	      FT_Get_Name_Index, freetype/freetype.h, -lm,,, [
++#include <ft2build.h>
++#include FT_FREETYPE_H
++])
+ AC_SUBST(freetype2_LIBS)
+ AC_SUBST(freetype2_CFLAGS)
+ if test "x$smr_have_freetype2_library" != xyes; then
+--- xpdf-3.00/aclocal.m4.orig	2004-01-22 02:26:44.000000000 +0100
++++ xpdf-3.00/aclocal.m4	2004-01-25 16:04:19.740047968 +0100
+@@ -152,6 +152,7 @@
+   pushdef([smr_name],        $1)
+   pushdef([smr_header],      $2)
+   pushdef([smr_extra_flags], $3)
++  pushdef([smr_extra_incl],  $4)
+   pushdef([smr_safe_name],   smr_safe_translation(smr_name))
+ 
+   dnl Add the option to `configure --help'.  We don't need to supply the
+@@ -189,7 +190,8 @@
+   dnl HAVE_[]smr_header (in all capitals).
+   AC_CHECK_HEADERS([smr_header],
+                    smr_have_[]smr_safe_name[]_header=yes,
+-                   smr_have_[]smr_safe_name[]_header=no)
++                   smr_have_[]smr_safe_name[]_header=no,
++		   [smr_extra_incl])
+ 
+   if test x"$smr_test_CPPFLAGS" = xset; then
+     CPPFLAGS=$smr_save_CPPFLAGS
+@@ -200,6 +202,7 @@
+   popdef([smr_name])
+   popdef([smr_header])
+   popdef([smr_extra_flags])
++  popdef([smr_extra_incl])
+   popdef([smr_safe_name])
+ ])
+ 
+@@ -217,6 +220,7 @@
+   pushdef([smr_extra_libs],  $6)
+   pushdef([smr_extra_flags], $7)
+   pushdef([smr_prototype],   $8)
++  pushdef([smr_extra_incl],  $9)
+   pushdef([smr_safe_name],   smr_safe_translation(smr_name))
+ 
+   dnl Give the user (via "configure --help") an interface to specify
+@@ -233,7 +237,7 @@
+     dnl library, then give the user (via "configure --help") an
+     dnl interface to specify where this header file can be found (if it
+     dnl isn't found by the compiler by default).
+-    ifelse(smr_header, , , [smr_ARG_WITHINCLUDES(smr_name, smr_header, smr_extra_flags)])
++    ifelse(smr_header, , , [smr_ARG_WITHINCLUDES(smr_name, smr_header, smr_extra_flags, smr_extra_incl)])
+ 
+     # We need only look for the library if the header has been found
+     # (or no header is needed).
+@@ -270,5 +274,6 @@
+   popdef([smr_extra_libs])
+   popdef([smr_extra_flags])
+   popdef([smr_prototype])
++  popdef([smr_extra_incl])
+   popdef([smr_safe_name])
+ ])
