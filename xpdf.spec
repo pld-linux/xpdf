@@ -33,7 +33,7 @@ komputer klasy PC 486-66 z Linuxem na pok³adzie.
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure \
+./configure %{_target} \
 	--prefix=/usr/X11R6 \
 	--with-gzip
 make
