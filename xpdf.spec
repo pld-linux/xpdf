@@ -19,6 +19,7 @@ BuildRequires:	t1lib-devel >= 1.3.0
 BuildRequires:	freetype-devel >= 2.0.6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Provides:	pdftops
+Obsoletes:	pdftohtml-pdftops
 
 %define 	_prefix		/usr/X11R6
 %define 	_mandir 	%{_prefix}/man
