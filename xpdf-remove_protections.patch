@@ -28,7 +28,7 @@ diff -Nur xpdf-2.01.orig/xpdf/XPDFCore.cc xpdf-2.01/xpdf/XPDFCore.cc
 -  if (!doc->okToCopy()) {
 -    return NULL;
 -  }
-   textOut = new TextOutputDev(NULL, gFalse, gFalse, gFalse);
+   textOut = new TextOutputDev(NULL, gTrue, gFalse, gFalse);
    if (!textOut->isOk()) {
      delete textOut;
 @@ -1585,10 +1576,9 @@
