@@ -9,8 +9,13 @@ Release:	1
 License:	GPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
+Group(es):	X11/Aplicaciones
+Group(fr):	X11/Applications
 Group(pl):	X11/Aplikacje
-Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tgz
+Group(pt_BR):	X11/AplicaÁıes
+Group(pt):	X11/AplicaÁıes
+Group(ru):	X11/“…Ãœ÷≈Œ…—
+Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 URL:		http://www.foolabs.com/xpdf/
