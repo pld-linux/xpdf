@@ -30,8 +30,6 @@ BuildRequires:	freetype-devel >= 2.0.6
 BuildRequires:	libstdc++-devel
 BuildRequires:	t1lib-devel >= 1.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Provides:	pdftops
-Obsoletes:	pdftohtml-pdftops
 
 %define         _noautoreqdep   libXm.so.1 libXm.so.2
 %define		_prefix		/usr/X11R6
@@ -86,6 +84,8 @@ Format (PDF). Вона швидка й ефективна та використову╓ стандартн╕
 Summary:	Set of tools for viewing information and converting PDF files
 Summary(pl):	Zestaw narzЙdzi do wy╤wietlania informacji i konwertowania plikСw PDF
 Group:		Applications/Publishing
+Provides:	pdftops
+Obsoletes:	pdftohtml-pdftops
 
 %description tools
 Set of utilities for displaying information about PDF-files (pdfinfo,
