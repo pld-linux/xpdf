@@ -2,6 +2,8 @@
 # Conditional build:
 %bcond_without	protections	# remove protections against fair use (printing and copying)
 #
+%define		_pl	pl2
+
 Summary:	Portable Document Format (PDF) file viewer
 Summary(es):	Visualizador de archivos PDF
 Summary(ja):	X Window System での PDF ファイルヴューア
@@ -25,7 +27,7 @@ Patch2:		%{name}-fontdirs.patch
 # probably obsolete
 Patch3:		%{name}-nonumericlocale.patch
 Patch4:		%{name}-intoverflow.patch
-Patch5:		ftp://ftp.foolabs.com/pub/xpdf/xpdf-3.00pl2.patch
+Patch5:		%{name}-%{version}%{_pl}.patch
 
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
@@ -106,7 +108,7 @@ pdftops, pdftotext).
 %patch1 -p1
 %patch2 -p1
 %patch4 -p1
-%patch5 -p1
+%patch5 -p0
 
 %build
 %{__autoconf}
