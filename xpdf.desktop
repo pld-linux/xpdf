@@ -1,7 +1,10 @@
 [Desktop Entry]
-Name=xPDF
+Name=xpdf
+Name[sv]=xpdf
 Comment=Views Adobe PDF files
 Comment[pl]=Przegl±darka plików PDF
+Comment[sv]=Visar Adobe PDF-filer
 Exec=xpdf
 Terminal=0
 Type=Application
+MimeType=application/pdf
