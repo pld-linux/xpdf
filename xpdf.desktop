@@ -1,8 +1,8 @@
 [Desktop Entry]
-Name=xpdf
+Name=Xpdf
 Comment=Views Adobe PDF files
 Comment[de]=PDF-Betrachter
-Comment[pl]=Przeglądarka plików PDF
+Comment[pl]=Przeglądarka plików Adobe PDF
 Comment[sv]=Visar Adobe PDF-filer
 Icon=xpdf.png
 Exec=xpdf
