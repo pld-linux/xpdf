@@ -11,7 +11,7 @@ Summary(ru):	Программа для просмотра PDF файлов
 Summary(uk):	Програма для перегляду PDF файл╕в
 Name:		xpdf
 Version:	2.00
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
@@ -31,6 +31,7 @@ Provides:	pdftops
 Obsoletes:	pdftohtml-pdftops
 
 %define         _noautoreqdep   libXm.so.1
+%define         _noautoreqdep   libXm.so.2
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
 
