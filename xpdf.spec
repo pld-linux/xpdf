@@ -98,6 +98,9 @@ pdftops, pdftotext).
 %patch1 -p1
 
 %build
+newoptflags="%{optflags} -fomit-frame-pointer"
+%define optflags $newoptflags
+
 CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 %configure \
 	--with-gzip \
