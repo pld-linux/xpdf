@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=xPDF
+Comment=Views Adobe PDF files
+Exec=xpdf
+Terminal=0
+Type=Application
