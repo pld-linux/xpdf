@@ -27,7 +27,7 @@ Motif or Xt libraries.  It uses standard X fonts.  Xpdf is quite usable on a
 Xpdf jest przegl±dark± plików zapisanych w formacie PDF (nazywanych równie¿
 czasami plikami 'Acrobata', od nazwy programu firmy Adobe). Xpdf jest 
 zaprojektowany tak, by byæ ma³ym i wydajnym. Nie u¿ywa bibliotek Motif czy Xt.
-Wykorzystuje standardowe fonty ¶rodowiska X. By móc u¿ywaæ Xpdf wystarczy
+Wykorzystuje standardowe czcionki ¶rodowiska X. By móc u¿ywaæ Xpdf wystarczy
 komputer klasy PC 486-66 z Linuxem na pok³adzie.
 
 %prep
