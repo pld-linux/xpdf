@@ -1,6 +1,6 @@
-diff -Nur xpdf-2.00.orig/xpdf/XPDFCore.cc xpdf-2.00/xpdf/XPDFCore.cc
---- xpdf-2.00.orig/xpdf/XPDFCore.cc	Sun Nov  3 23:15:37 2002
-+++ xpdf-2.00/xpdf/XPDFCore.cc	Mon Nov  4 21:08:51 2002
+diff -Nur xpdf-2.01.orig/xpdf/XPDFCore.cc xpdf-2.01/xpdf/XPDFCore.cc
+--- xpdf-2.01.orig/xpdf/XPDFCore.cc	Sun Nov  3 23:15:37 2002
++++ xpdf-2.01/xpdf/XPDFCore.cc	Mon Nov  4 21:08:51 2002
 @@ -906,9 +906,6 @@
  // global variables (currentSelection and currentSelectionOwner).
  
@@ -28,7 +28,7 @@ diff -Nur xpdf-2.00.orig/xpdf/XPDFCore.cc xpdf-2.00/xpdf/XPDFCore.cc
 -  if (!doc->okToCopy()) {
 -    return NULL;
 -  }
-   textOut = new TextOutputDev(NULL, gFalse, gFalse);
+   textOut = new TextOutputDev(NULL, gFalse, gFalse, gFalse);
    if (!textOut->isOk()) {
      delete textOut;
 @@ -1585,10 +1576,9 @@
