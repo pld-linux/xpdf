@@ -2,15 +2,15 @@ Summary:	Portable Document Format (PDF) file viewer
 Summary(pl):	Przegl±darka plików w formacie PDF
 Name:		xpdf
 Version:	0.80
-Release:	1
+Release:	5
 Group:		X11/Applications
 Group(pl):	X11/Aplikacje
 Copyright:	freeware
-Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
-Source1:	xpdf.wmconfig
-Patch1:		xpdf-0.7a-patch1
-Patch2:		xpdf-0.7a-type3.patch
+Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tgz
+Source1:	xpdf.desktop
+Patch:		ftp://ftp.sci.usq.edu.au/pub/linux/xpdf/xpdf-0.80-decrypt.patch
 URL:		http://www.foolabs.com/xpdf/
+Icon:		xpdfIcon.gif
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %description
@@ -29,24 +29,23 @@ komputer klasy PC 486-66 z Linuxem na pok³adzie.
 
 %prep
 %setup -q
-%patch1 -p1
-%patch2 -p1
+%patch -p1
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" \
+CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure \
-	--prefix=/usr/X11R6
-
+	--prefix=/usr/X11R6 \
+	--with-gzip
 make
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{usr/X11R6/{bin,man/man1},etc/X11/wmconfig}
+install -d $RPM_BUILD_ROOT/{usr/X11R6/{bin,man/man1},/etc/X11/applnk/Applications}
 
 make prefix=$RPM_BUILD_ROOT/usr/X11R6 install
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/wmconfig/xpdf
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/applnk/Applications/xpdf.desktop
 
 gzip -9nf ANNOUNCE CHANGES README \
 	$RPM_BUILD_ROOT/usr/X11R6/man/man1/*
@@ -59,11 +58,18 @@ rm -rf $RPM_BUILD_ROOT
 %doc {ANNOUNCE,CHANGES,README}.gz
 %attr(755,root,root) /usr/X11R6/bin/*
 /usr/X11R6/man/man1/*
-%config(missingok) /etc/X11/wmconfig/xpdf
+/etc/X11/applnk/Applications/*
 
 %changelog
+* Thu Apr  1 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [0.80-5]
+- added ftp://ftp.sci.usq.edu.au/pub/linux/xpdf/xpdf-0.80-decrypt.patch for
+  crypted PDF files,
+- added LDFLAGS="-s" to ./configure enviroment,
+- added package icon,
+- applnk file instead wmconfig.
+
 * Thu Apr  1 1999 Piotr Czerwiñski <pius@pld.org.pl>
-  
 - changed BuildRoot to /tmp/%%{name}-%%{version}-root,
 - added pl translation,
 - added -q %setup parameter,
