@@ -60,7 +60,7 @@ ou Xt.
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
-export CXXFLAGS 
+export CXXFLAGS
 %configure2_13 \
 	--with-gzip \
     --enable-a4-paper \
