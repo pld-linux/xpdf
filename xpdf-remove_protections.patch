@@ -1,0 +1,97 @@
+diff -urN xpdf-1.01.orig/xpdf/pdfimages.cc xpdf-1.01/xpdf/pdfimages.cc
+--- xpdf-1.01.orig/xpdf/pdfimages.cc	Tue May 21 08:40:09 2002
++++ xpdf-1.01/xpdf/pdfimages.cc	Tue Oct 29 23:28:44 2002
+@@ -116,8 +116,8 @@
+ 
+   // check for copy permission
+   if (!doc->okToCopy()) {
+-    error(-1, "Copying of images from this document is not allowed.");
+-    goto err;
++    error(-1, "Copying of images from this document is not allowed, but possible :-)");
++//    goto err;
+   }
+ 
+   // get page range
+diff -urN xpdf-1.01.orig/xpdf/pdftops.cc xpdf-1.01/xpdf/pdftops.cc
+--- xpdf-1.01.orig/xpdf/pdftops.cc	Tue May 21 08:40:09 2002
++++ xpdf-1.01/xpdf/pdftops.cc	Tue Oct 29 23:28:20 2002
+@@ -239,8 +239,8 @@
+ 
+   // check for print permission
+   if (!doc->okToPrint()) {
+-    error(-1, "Printing this document is not allowed.");
+-    goto err1;
++    error(-1, "Printing this document is not allowed, but possible :-)");
++//    goto err1;
+   }
+ 
+   // construct PostScript file name
+diff -urN xpdf-1.01.orig/xpdf/pdftotext.cc xpdf-1.01/xpdf/pdftotext.cc
+--- xpdf-1.01.orig/xpdf/pdftotext.cc	Tue May 21 08:40:09 2002
++++ xpdf-1.01/xpdf/pdftotext.cc	Tue Oct 29 23:28:29 2002
+@@ -149,8 +149,8 @@
+ 
+   // check for copy permission
+   if (!doc->okToCopy()) {
+-    error(-1, "Copying of text from this document is not allowed.");
+-    goto err2;
++    error(-1, "Copying of text from this document is not allowed, but possible :-)");
++//    goto err2;
+   }
+ 
+   // construct text file name
+diff -urN xpdf-1.01.orig/xpdf/xpdf.cc xpdf-1.01/xpdf/xpdf.cc
+--- xpdf-1.01.orig/xpdf/xpdf.cc	Tue May 21 08:40:09 2002
++++ xpdf-1.01/xpdf/xpdf.cc	Tue Oct 29 23:23:48 2002
+@@ -1435,12 +1435,12 @@
+     // selection
+     if (selectXMin < selectXMax && selectYMin < selectYMax) {
+ #ifndef NO_TEXT_SELECT
+-      if (doc->okToCopy()) {
++//      if (doc->okToCopy()) {
+ 	s = out->getText(selectXMin, selectYMin, selectXMax, selectYMax);
+ 	win->setSelection(NULL, s);
+-      } else {
+-	error(-1, "Copying of text from this document is not allowed.");
+-      }
++//      } else {
++//	error(-1, "Copying of text from this document is not allowed.");
++//      }
+ #endif
+ 
+     // link
+@@ -2298,7 +2298,7 @@
+     // do the PostScript output
+     psDialog->setBusyCursor(gTrue);
+     win->setBusyCursor(gTrue);
+-    if (doc->okToPrint()) {
++//    if (doc->okToPrint()) {
+       psOut = new PSOutputDev(psFileName->getCString(), doc->getXRef(),
+ 			      doc->getCatalog(), psFirstPage, psLastPage,
+ 			      psModePS);
+@@ -2306,9 +2306,9 @@
+ 	doc->displayPages(psOut, psFirstPage, psLastPage, 72, 0, gFalse);
+       }
+       delete psOut;
+-    } else {
+-      error(-1, "Printing this document is not allowed.");
+-    }
++//    } else {
++//      error(-1, "Printing this document is not allowed.");
++//    }
+ 
+     delete psDialog;
+     win->setBusyCursor(gFalse);
+@@ -2490,10 +2490,10 @@
+  found:
+   setSelection(xMin, yMin, xMax, yMax);
+ #ifndef NO_TEXT_SELECT
+-  if (doc->okToCopy()) {
++//  if (doc->okToCopy()) {
+     s1 = out->getText(selectXMin, selectYMin, selectXMax, selectYMax);
+     win->setSelection(NULL, s1);
+-  }
++//  }
+ #endif
+ 
+  done:
