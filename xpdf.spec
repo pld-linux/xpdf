@@ -25,6 +25,8 @@ Patch2:		%{name}-fontdirs.patch
 # probably obsolete
 Patch3:		%{name}-nonumericlocale.patch
 Patch4:		%{name}-intoverflow.patch
+Patch5:		ftp://ftp.foolabs.com/pub/xpdf/xpdf-3.00pl2.patch
+
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
 BuildRequires:	XFree86-devel
@@ -104,6 +106,7 @@ pdftops, pdftotext).
 %patch1 -p1
 %patch2 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 %{__autoconf}
