@@ -1,97 +1,88 @@
-diff -urN xpdf-1.01.orig/xpdf/pdfimages.cc xpdf-1.01/xpdf/pdfimages.cc
---- xpdf-1.01.orig/xpdf/pdfimages.cc	Tue May 21 08:40:09 2002
-+++ xpdf-1.01/xpdf/pdfimages.cc	Tue Oct 29 23:28:44 2002
-@@ -116,8 +116,8 @@
+diff -Nur xpdf-2.00.orig/xpdf/XPDFCore.cc xpdf-2.00/xpdf/XPDFCore.cc
+--- xpdf-2.00.orig/xpdf/XPDFCore.cc	Sun Nov  3 23:15:37 2002
++++ xpdf-2.00/xpdf/XPDFCore.cc	Mon Nov  4 21:08:51 2002
+@@ -906,9 +906,6 @@
+ // global variables (currentSelection and currentSelectionOwner).
+ 
+ void XPDFCore::copySelection() {
+-  if (!doc->okToCopy()) {
+-    return;
+-  }
+   if (currentSelection) {
+     delete currentSelection;
+   }
+@@ -947,9 +944,6 @@
+ }
+ 
+ GString *XPDFCore::extractText(int xMin, int yMin, int xMax, int yMax) {
+-  if (!doc->okToCopy()) {
+-    return NULL;
+-  }
+   return out->getText(xMin, yMin, xMax, yMax);
+ }
+ 
+@@ -958,9 +952,6 @@
+   TextOutputDev *textOut;
+   GString *s;
+ 
+-  if (!doc->okToCopy()) {
+-    return NULL;
+-  }
+   textOut = new TextOutputDev(NULL, gFalse, gFalse);
+   if (!textOut->isOk()) {
+     delete textOut;
+@@ -1585,10 +1576,9 @@
+ #ifndef NO_TEXT_SELECT
+ 	  if (core->selectXMin != core->selectXMax &&
+ 	      core->selectYMin != core->selectYMax) {
+-	    if (core->doc->okToCopy()) {
+-	      core->copySelection();
+-	    } else {
+-	      error(-1, "Copying of text from this document is not allowed.");
++	    core->copySelection();
++	    if (!core->doc->okToCopy()) {
++	      error(-1, "Note: creator didn't want you to copy text from this document.");
+ 	    }
+ 	  }
+ #endif
+diff -Nur xpdf-2.00.orig/xpdf/XPDFViewer.cc xpdf-2.00/xpdf/XPDFViewer.cc
+--- xpdf-2.00.orig/xpdf/XPDFViewer.cc	Sun Nov  3 23:15:37 2002
++++ xpdf-2.00/xpdf/XPDFViewer.cc	Mon Nov  4 21:09:12 2002
+@@ -2124,8 +2124,7 @@
+ 
+   doc = viewer->core->getDoc();
+   if (!doc->okToPrint()) {
+-    error(-1, "Printing this document is not allowed.");
+-    return;
++    error(-1, "Note: creator didn't want you to print this document.");
+   }
+ 
+   viewer->core->setBusyCursor(gTrue);
+diff -Nur xpdf-2.00.orig/xpdf/pdfimages.cc xpdf-2.00/xpdf/pdfimages.cc
+--- xpdf-2.00.orig/xpdf/pdfimages.cc	Sun Nov  3 23:15:37 2002
++++ xpdf-2.00/xpdf/pdfimages.cc	Mon Nov  4 21:09:41 2002
+@@ -120,9 +120,7 @@
  
    // check for copy permission
    if (!doc->okToCopy()) {
 -    error(-1, "Copying of images from this document is not allowed.");
--    goto err;
-+    error(-1, "Copying of images from this document is not allowed, but possible :-)");
-+//    goto err;
+-    exitCode = 3;
+-    goto err1;
++    error(-1, "Note: creator didn't want you to copy images from this document.");
    }
  
    // get page range
-diff -urN xpdf-1.01.orig/xpdf/pdftops.cc xpdf-1.01/xpdf/pdftops.cc
---- xpdf-1.01.orig/xpdf/pdftops.cc	Tue May 21 08:40:09 2002
-+++ xpdf-1.01/xpdf/pdftops.cc	Tue Oct 29 23:28:20 2002
-@@ -239,8 +239,8 @@
- 
-   // check for print permission
-   if (!doc->okToPrint()) {
--    error(-1, "Printing this document is not allowed.");
--    goto err1;
-+    error(-1, "Printing this document is not allowed, but possible :-)");
-+//    goto err1;
-   }
- 
-   // construct PostScript file name
-diff -urN xpdf-1.01.orig/xpdf/pdftotext.cc xpdf-1.01/xpdf/pdftotext.cc
---- xpdf-1.01.orig/xpdf/pdftotext.cc	Tue May 21 08:40:09 2002
-+++ xpdf-1.01/xpdf/pdftotext.cc	Tue Oct 29 23:28:29 2002
-@@ -149,8 +149,8 @@
+diff -Nur xpdf-2.00.orig/xpdf/pdftotext.cc xpdf-2.00/xpdf/pdftotext.cc
+--- xpdf-2.00.orig/xpdf/pdftotext.cc	Sun Nov  3 23:15:37 2002
++++ xpdf-2.00/xpdf/pdftotext.cc	Mon Nov  4 21:10:18 2002
+@@ -153,9 +153,7 @@
  
    // check for copy permission
    if (!doc->okToCopy()) {
 -    error(-1, "Copying of text from this document is not allowed.");
+-    exitCode = 3;
 -    goto err2;
-+    error(-1, "Copying of text from this document is not allowed, but possible :-)");
-+//    goto err2;
++    error(-1, "Note: creator didn't want you to copy text from this document.");
    }
  
    // construct text file name
-diff -urN xpdf-1.01.orig/xpdf/xpdf.cc xpdf-1.01/xpdf/xpdf.cc
---- xpdf-1.01.orig/xpdf/xpdf.cc	Tue May 21 08:40:09 2002
-+++ xpdf-1.01/xpdf/xpdf.cc	Tue Oct 29 23:23:48 2002
-@@ -1435,12 +1435,12 @@
-     // selection
-     if (selectXMin < selectXMax && selectYMin < selectYMax) {
- #ifndef NO_TEXT_SELECT
--      if (doc->okToCopy()) {
-+//      if (doc->okToCopy()) {
- 	s = out->getText(selectXMin, selectYMin, selectXMax, selectYMax);
- 	win->setSelection(NULL, s);
--      } else {
--	error(-1, "Copying of text from this document is not allowed.");
--      }
-+//      } else {
-+//	error(-1, "Copying of text from this document is not allowed.");
-+//      }
- #endif
- 
-     // link
-@@ -2298,7 +2298,7 @@
-     // do the PostScript output
-     psDialog->setBusyCursor(gTrue);
-     win->setBusyCursor(gTrue);
--    if (doc->okToPrint()) {
-+//    if (doc->okToPrint()) {
-       psOut = new PSOutputDev(psFileName->getCString(), doc->getXRef(),
- 			      doc->getCatalog(), psFirstPage, psLastPage,
- 			      psModePS);
-@@ -2306,9 +2306,9 @@
- 	doc->displayPages(psOut, psFirstPage, psLastPage, 72, 0, gFalse);
-       }
-       delete psOut;
--    } else {
--      error(-1, "Printing this document is not allowed.");
--    }
-+//    } else {
-+//      error(-1, "Printing this document is not allowed.");
-+//    }
- 
-     delete psDialog;
-     win->setBusyCursor(gFalse);
-@@ -2490,10 +2490,10 @@
-  found:
-   setSelection(xMin, yMin, xMax, yMax);
- #ifndef NO_TEXT_SELECT
--  if (doc->okToCopy()) {
-+//  if (doc->okToCopy()) {
-     s1 = out->getText(selectXMin, selectYMin, selectXMax, selectYMax);
-     win->setSelection(NULL, s1);
--  }
-+//  }
- #endif
- 
-  done:
