@@ -7,7 +7,7 @@ Summary(ru):	Программа для просмотра PDF файлов
 Summary(uk):	Програма для перегляду PDF файл╕в
 Name:		xpdf
 Version:	1.01
-Release:	2
+Release:	3
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
@@ -100,6 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc ANNOUNCE CHANGES README
 %attr(755,root,root) %{_bindir}/*
+%{_sysconfdir}/*
 %{_mandir}/man1/*
 %{_mandir}/man5/*
 %{_applnkdir}/Graphics/Viewers/*
