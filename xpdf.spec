@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_without protections	# remove protections against fair use (printing and copying)
+%bcond_without	protections	# remove protections against fair use (printing and copying)
 #
 Summary:	Portable Document Format (PDF) file viewer
 Summary(es):	Visualizador de archivos PDF
@@ -105,8 +105,9 @@ CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 	--enable-a4-paper \
 	--enable-opi \
 	--enable-freetype2 \
+	--enable-multithreaded \
+	--enable-wordlist \
 	--with-freetype2-includes=/usr/include/freetype2 \
-	--with-freetype-includes=/usr/include/freetype \
 	--with-Xm-includes=/usr/X11R6/include
 
 %{__make}
