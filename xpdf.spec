@@ -19,6 +19,7 @@ Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}rc
 Patch0:		%{name}-remove_protections.patch
+# official security fix
 Patch1:		%{name}-nonumericlocale.patch
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
@@ -29,6 +30,8 @@ BuildRequires:	motif-devel
 BuildRequires:	t1lib-devel >= 1.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		_prefix		/usr/X11R6
+%define		_mandir		%{_prefix}/man
 %define		_noautoreqdep	libXm.so.1 libXm.so.2
 
 %description
@@ -90,7 +93,6 @@ pdftotext).
 Zestaw programów do wy¶wietlania informacji o plikach PDF (pdfinfo,
 pdffonts, pdfimages) i konwertowania ich do innych formatów (pdftopbm,
 pdftops, pdftotext).
-
 
 %prep
 %setup -q
