@@ -12,7 +12,6 @@ Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
 BuildRequires:	libstdc++-devel
-BuildRequires:	xpm-devel
 BuildRequires:	XFree86-devel
 BuildRequires:	t1lib-devel >= 1.0.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
