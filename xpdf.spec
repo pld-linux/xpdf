@@ -2,7 +2,7 @@ Summary:	Portable Document Format (PDF) file viewer
 Summary(pl):	Przegl±darka plików w formacie PDF
 Name:		xpdf
 Version:	0.80
-Release:	5
+Release:	6
 Group:		X11/Applications
 Group(pl):	X11/Aplikacje
 Copyright:	freeware
@@ -61,6 +61,10 @@ rm -rf $RPM_BUILD_ROOT
 /etc/X11/applnk/Applications/*
 
 %changelog
+* Wed Apr 21 1999 Piotr Czerwiñski <pius@pld.org.pl>
+  [0.80-6]
+- recompiled on rpm 3.
+
 * Thu Apr  1 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.80-5]
 - added ftp://ftp.sci.usq.edu.au/pub/linux/xpdf/xpdf-0.80-decrypt.patch for
