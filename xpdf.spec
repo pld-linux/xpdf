@@ -10,12 +10,12 @@ Summary(pt_BR):	Visualizador de arquivos PDF
 Summary(ru):	Программа для просмотра PDF файлов
 Summary(uk):	Програма для перегляду PDF файл╕в
 Name:		xpdf
-Version:	2.03
+Version:	3.00
 Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
-# Source0-md5:	2bb849c4f525c5fd451f900974f1587c
+# Source0-md5:	95294cef3031dd68e65f331e8750b2c2
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}rc
@@ -96,7 +96,7 @@ pdftops, pdftotext).
 %prep
 %setup -q
 %{!?with_protections:%patch0 -p1}
-%patch1 -p1
+#%patch1 -p1
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
