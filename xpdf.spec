@@ -5,7 +5,7 @@ Summary(pl):	Przegl±darka plików w formacie PDF
 Summary(pt_BR):	Visualizador de arquivos PDF
 Name:		xpdf
 Version:	1.00
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
@@ -22,8 +22,8 @@ URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
 BuildRequires:	libstdc++-devel
 BuildRequires:	XFree86-devel
-BuildRequires:	t1lib-devel >= 1.0.0
-BuildRequires:	freetype-devel >= 2.0.5
+BuildRequires:	t1lib-devel >= 1.3.0
+BuildRequires:	freetype-devel >= 2.0.6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	_prefix		/usr/X11R6
@@ -70,6 +70,7 @@ CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 export CXXFLAGS 
 %configure2_13 \
 	--with-gzip \
+    --enable-a4-paper \
 	--enable-opi \
 	--enable-freetype2 \
 	--with-freetype2-includes=/usr/include/freetype2 \
