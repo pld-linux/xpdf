@@ -1,6 +1,8 @@
 Summary:	Portable Document Format (PDF) file viewer
+Summary(es):	Visualizador de archivos PDF
 Summary(ja):	X Window System ¤Ç¤Î PDF ¥Õ¥¡¥¤¥ë¥ô¥å¡¼¥¢
 Summary(pl):	Przegl±darka plików w formacie PDF
+Summary(pt_BR):	Visualizador de arquivos PDF
 Name:		xpdf
 Version:	0.93
 Release:	1
@@ -28,6 +30,12 @@ Xpdf is an X Window System based viewer for Portable Document Format
 Acrobat (Adobe's PDF viewer). Xpdf is a small and efficient program
 which uses standard X fonts.
 
+%description -l es
+Xpdf es un visor de archivos PDF (Portable Document Format). (Estos
+son algunas veces llamados de archivos 'Acrobat', nombre del software
+PDF del Adobe. Xpdf fue proyectado para ser pequeño y eficiente. Usa
+fuentes padrón X y no necesita de las bibliotecas Motif el Xt.
+
 %description -l ja
 xpdf ¤Ï Portable Document Format (PDF) ¥Õ¥¡¥¤¥ë¤Î X Window System
 ¾å¤Ç¤Î ¥ô¥å¡¼¥¢¤Ç¤¹¡£PDF ¥Õ¥¡¥¤¥ë¤Ï Adobe Acrobat (Adobe ¤Î PDF
@@ -41,6 +49,13 @@ Xpdf jest przegl±dark± plików zapisanych w formacie PDF (Portable
 Document Format). Xpdf jest zaprojektowany tak, by byæ ma³ym i
 wydajnym programem. Nie u¿ywa bibliotek Motif czy Xt u¿ywaj±cym fontów
 z zasobów X Window.
+
+%description -l pt_BR
+Xpdf é um visualizador de arquivos PDF (Portable Document Format).
+(Estes são algumas vezes chamados de arquivos 'Acrobat', nome do
+software PDF da Adobe. Xpdf foi projetado para ser pequeno e
+eficiente. Ele usa fontes padrão X e não precisa das bibliotecas Motif
+ou Xt.
 
 %prep
 %setup -q
