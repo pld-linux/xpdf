@@ -12,9 +12,9 @@ Patch0:		ftp://ftp.sci.usq.edu.au/pub/linux/xpdf/xpdf-0.80-decrypt.patch
 Patch1:		xpdf-DESTDIR.patch
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
-BuildPrereq:	libstdc++-devel
-BuildPrereq:	xpm-devel
-BuildPrereq:	XFree86-devel
+BuildRequires:	libstdc++-devel
+BuildRequires:	xpm-devel
+BuildRequires:	XFree86-devel
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %define _prefix	/usr/X11R6
