@@ -11,7 +11,7 @@ Summary(ru):	Программа для просмотра PDF файлов
 Summary(uk):	Програма для перегляду PDF файл╕в
 Name:		xpdf
 Version:	2.01
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
@@ -82,6 +82,22 @@ Xpdf - це програма для перегляду файл╕в в формат╕ Portable Document
 Format (PDF). Вона швидка й ефективна та використову╓ стандартн╕
 шрифти X Window.
 
+%package tools
+Summary:	Set of tools for viewing information and converting PDF files
+Summary(pl):	Zestaw narzЙdzi do wy╤wietlania informacji i konwertowania plikСw PDF
+Group:		Applications/Publishing
+
+%description tools
+Set of utilities for displaying information about PDF-files (pdfinfo,
+pdffonts, pdfimages) and converting them (pdftopbm, pdftops,
+pdftotext).
+
+%description tools -l pl
+Zestaw programСw do wy╤wietlania informacji o plikach PDF (pdfinfo,
+pdffonts, pdfimages) i konwertowania ich do innych formatСw (pdftopbm,
+pdftops, pdftotext).
+
+
 %prep
 %setup -q
 %{?_without_protections:%patch0 -p1}
@@ -119,10 +135,15 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ANNOUNCE CHANGES README
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/xpdf
 %config(noreplace,missingok) %verify(not md5 size mtime) %{_sysconfdir}/*
 %{_datadir}/xpdf
-%{_mandir}/man1/*
-%{_mandir}/man5/*
+%{_mandir}/man1/xpdf.1*
+%{_mandir}/man5/xpdfrc.5*
 %{_applnkdir}/Graphics/Viewers/*
 %{_pixmapsdir}/*
+
+%files tools
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/pdf*
+%{_mandir}/man1/pdf*
