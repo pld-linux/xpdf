@@ -7,7 +7,7 @@ Summary(ru):	ðÒÏÇÒÁÍÍÁ ÄÌÑ ÐÒÏÓÍÏÔÒÁ PDF ÆÁÊÌÏ×
 Summary(uk):	ðÒÏÇÒÁÍÁ ÄÌÑ ÐÅÒÅÇÌÑÄÕ PDF ÆÁÊÌ¦×
 Name:		xpdf
 Version:	1.01
-Release:	3
+Release:	4
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
@@ -15,16 +15,16 @@ Source1:	%{name}.desktop
 Source2:	%{name}.png
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
-BuildRequires:	libstdc++-devel
 BuildRequires:	XFree86-devel
-BuildRequires:	t1lib-devel >= 1.3.0
 BuildRequires:	freetype-devel >= 2.0.6
+BuildRequires:	libstdc++-devel
+BuildRequires:	t1lib-devel >= 1.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Provides:	pdftops
 Obsoletes:	pdftohtml-pdftops
 
-%define 	_prefix		/usr/X11R6
-%define 	_mandir 	%{_prefix}/man
+%define		_prefix		/usr/X11R6
+%define		_mandir		%{_prefix}/man
 
 %description
 Xpdf is an X Window System based viewer for Portable Document Format
@@ -49,8 +49,8 @@ xpdf ¤Ï Portable Document Format (PDF) ¥Õ¥¡¥¤¥ë¤Î X Window System
 %description -l pl
 Xpdf jest przegl±dark± plików zapisanych w formacie PDF (Portable
 Document Format). Xpdf jest zaprojektowany tak, by byæ ma³ym i
-wydajnym programem. Nie u¿ywa bibliotek Motif czy Xt u¿ywaj±cym fontów
-z zasobów X Window.
+wydajnym programem. Nie korzysta z bibliotek Motif czy Xt, u¿ywa
+fontów z zasobów X Window.
 
 %description -l pt_BR
 Xpdf é um visualizador de arquivos PDF (Portable Document Format).
@@ -86,7 +86,8 @@ CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_applnkdir}/Graphics/Viewers,%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/Graphics/Viewers,%{_pixmapsdir}} \
+	$RPM_BUILD_ROOT%{_datadir}/xpdf
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
@@ -101,6 +102,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc ANNOUNCE CHANGES README
 %attr(755,root,root) %{_bindir}/*
 %config(noreplace,missingok) %verify(not md5 size mtime) %{_sysconfdir}/*
+%{_datadir}/xpdf
 %{_mandir}/man1/*
 %{_mandir}/man5/*
 %{_applnkdir}/Graphics/Viewers/*
