@@ -2,7 +2,6 @@
 # Conditional build:
 %bcond_without	protections	# remove protections against fair use (printing and copying)
 #
-%define		_pl	pl2
 
 Summary:	Portable Document Format (PDF) file viewer
 Summary(es):	Visualizador de archivos PDF
@@ -13,7 +12,7 @@ Summary(ru):	Программа для просмотра PDF файлов
 Summary(uk):	Програма для перегляду PDF файл╕в
 Name:		xpdf
 Version:	3.00
-Release:	7
+Release:	8
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
@@ -27,8 +26,8 @@ Patch2:		%{name}-fontdirs.patch
 # probably obsolete
 Patch3:		%{name}-nonumericlocale.patch
 Patch4:		%{name}-intoverflow.patch
-Patch5:		%{name}-%{version}%{_pl}.patch
-
+Patch5:		%{name}-%{version}pl2.patch
+Patch6:		%{name}-%{version}pl3.patch
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
 BuildRequires:	XFree86-devel
@@ -109,6 +108,7 @@ pdftops, pdftotext).
 %patch2 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 %{__autoconf}
