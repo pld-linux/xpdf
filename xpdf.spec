@@ -1,6 +1,6 @@
 #
 # Conditional build:
-# _without_protections	- remove protections against fair use (printing and copying)
+%bcond_without protections	# remove protections against fair use (printing and copying)
 #
 Summary:	Portable Document Format (PDF) file viewer
 Summary(es):	Visualizador de archivos PDF
@@ -38,7 +38,7 @@ Xpdf is an X Window System based viewer for Portable Document Format
 (PDF) files. PDF files are sometimes called Acrobat files, after Adobe
 Acrobat (Adobe's PDF viewer). Xpdf is a small and efficient program
 which uses standard X fonts.
-%{?_without_protections:This version ignores protections for both: printing and copying.}
+%{!?with_protections:This version ignores protections for both: printing and copying.}
 
 %description -l es
 Xpdf es un visor de archivos PDF (Portable Document Format). (Estos
@@ -58,7 +58,7 @@ xpdf ¤Ï Portable Document Format (PDF) ¥Õ¥¡¥¤¥ë¤Î X Window System
 Xpdf jest przegl±dark± plików zapisanych w formacie PDF (Portable
 Document Format). Xpdf jest zaprojektowany tak, by byæ ma³ym i
 wydajnym programem. U¿ywa fontów z zasobów X Window.
-%{?_without_protections:Ta wersja ignoruje blokady zarówno drukowania jak i kopiowania.}
+%{!?with_protections:Ta wersja ignoruje blokady zarówno drukowania jak i kopiowania.}
 
 %description -l pt_BR
 Xpdf é um visualizador de arquivos PDF (Portable Document Format).
@@ -95,7 +95,7 @@ pdftops, pdftotext).
 
 %prep
 %setup -q
-%{?_without_protections:%patch0 -p1}
+%{!?with_protections:%patch0 -p1}
 %patch1 -p1
 
 %build
