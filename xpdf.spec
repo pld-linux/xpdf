@@ -7,7 +7,7 @@ Summary(ru):	Программа для просмотра PDF файлов
 Summary(uk):	Програма для перегляду PDF файл╕в
 Name:		xpdf
 Version:	1.01
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
@@ -86,8 +86,7 @@ CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/{%{_bindir},%{_mandir}/man1} \
-	$RPM_BUILD_ROOT{%{_applnkdir}/Graphics/Viewers,%{_pixmapsdir}}
+install -d $RPM_BUILD_ROOT{%{_applnkdir}/Graphics/Viewers,%{_pixmapsdir}}
 
 %{__make} DESTDIR=$RPM_BUILD_ROOT install
 
@@ -102,5 +101,6 @@ rm -rf $RPM_BUILD_ROOT
 %doc ANNOUNCE CHANGES README
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
+%{_mandir}/man5/*
 %{_applnkdir}/Graphics/Viewers/*
 %{_pixmapsdir}/*
