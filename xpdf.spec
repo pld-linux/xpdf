@@ -20,11 +20,15 @@ Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}rc
 Patch0:		%{name}-remove_protections.patch
-Patch1:		%{name}-nonumericlocale.patch
+Patch1:		%{name}-freetype-includes.patch
+Patch2:		%{name}-fontdirs.patch
+# probably obsolete
+Patch3:		%{name}-nonumericlocale.patch
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
 BuildRequires:	XFree86-devel
-BuildRequires:	freetype-devel >= 2.0.6
+BuildRequires:	autoconf
+BuildRequires:	freetype-devel >= 2.1.0
 BuildRequires:	libstdc++-devel
 BuildRequires:	motif-devel
 BuildRequires:	t1lib-devel >= 1.3.0
@@ -96,9 +100,11 @@ pdftops, pdftotext).
 %prep
 %setup -q
 %{!?with_protections:%patch0 -p1}
-#%patch1 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
+%{__autoconf}
 CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 %configure \
 	--with-gzip \
@@ -107,8 +113,7 @@ CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 	--enable-freetype2 \
 	--enable-multithreaded \
 	--enable-wordlist \
-	--with-freetype2-includes=/usr/include/freetype2 \
-	--with-Xm-includes=/usr/X11R6/include
+	--with-freetype2-includes=/usr/include/freetype2
 
 %{__make}
 
@@ -117,7 +122,8 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}} \
 	$RPM_BUILD_ROOT%{_datadir}/xpdf
 
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
