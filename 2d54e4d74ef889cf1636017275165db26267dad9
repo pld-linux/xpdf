@@ -1,0 +1,2 @@
+- Added Provides pdftops (virtual package required by pdftohtml)
+- Release 3
