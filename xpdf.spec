@@ -41,7 +41,7 @@ xpdf ¤Ï Portable Document Format (PDF) ¥Õ¥¡¥¤¥ë¤Î X Window System
 Xpdf jest przegl±dark± plików zapisanych w formacie PDF (Portable
 Document Format). Xpdf jest zaprojektowany tak, by byæ ma³ym i
 wydajnym programem. Nie u¿ywa bibliotek Motif czy Xt u¿ywaj±cym fontów
-z zasobów X Wondow.
+z zasobów X Window.
 
 %prep
 %setup -q
