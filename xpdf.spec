@@ -4,8 +4,8 @@ Summary(ja):	X Window System 匹及 PDF 白央奶伙任亙□失
 Summary(pl):	Przegl康arka plik闚 w formacie PDF
 Summary(pt_BR):	Visualizador de arquivos PDF
 Name:		xpdf
-Version:	1.00
-Release:	3
+Version:	1.01
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
@@ -82,14 +82,13 @@ install -d $RPM_BUILD_ROOT/{%{_bindir},%{_mandir}/man1} \
 install %{SOURCE1} $RPM_BUILD_ROOT%{_applnkdir}/Graphics/Viewers/xpdf.desktop
 install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
 
-gzip -9nf ANNOUNCE CHANGES README
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc {ANNOUNCE,CHANGES,README}.gz
+%doc ANNOUNCE CHANGES README
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*
 %{_applnkdir}/Graphics/Viewers/*
