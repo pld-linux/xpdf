@@ -1,3 +1,7 @@
+#
+# Conditional build:
+# _without_protections	- remove protections against fair use (printing and copying)
+#
 Summary:	Portable Document Format (PDF) file viewer
 Summary(es):	Visualizador de archivos PDF
 Summary(ja):	X Window System §«§Œ PDF •’•°•§•Î•Ù•Â°º•¢
@@ -6,39 +10,43 @@ Summary(pt_BR):	Visualizador de arquivos PDF
 Summary(ru):	“œ«“¡ÕÕ¡ ƒÃ— –“œ”Õœ‘“¡ PDF ∆¡ Ãœ◊
 Summary(uk):	“œ«“¡Õ¡ ƒÃ— –≈“≈«Ã—ƒ’ PDF ∆¡ Ã¶◊
 Name:		xpdf
-Version:	1.01
-Release:	6
+Version:	2.01
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}rc
-Patch0:		ftp://ftp.foolabs.com/pub/xpdf/xpdf-2.01-patch1
-Icon:		xpdfIcon.gif
+Patch0:		%{name}-remove_protections.patch
+# official security fix
+Patch1:		ftp://ftp.foolabs.com/pub/xpdf/xpdf-2.01-patch1
+Patch2:		%{name}-nonumericlocale.patch
 URL:		http://www.foolabs.com/xpdf/
+Icon:		xpdfIcon.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	freetype-devel >= 2.0.6
 BuildRequires:	libstdc++-devel
+BuildRequires:	motif-devel
 BuildRequires:	t1lib-devel >= 1.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Provides:	pdftops
-Obsoletes:	pdftohtml-pdftops
 
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
+%define		_noautoreqdep	libXm.so.1 libXm.so.2
 
 %description
 Xpdf is an X Window System based viewer for Portable Document Format
 (PDF) files. PDF files are sometimes called Acrobat files, after Adobe
 Acrobat (Adobe's PDF viewer). Xpdf is a small and efficient program
 which uses standard X fonts.
+%{?_without_protections:This version ignores protections for both: printing and copying.}
 
 %description -l es
 Xpdf es un visor de archivos PDF (Portable Document Format). (Estos
 son algunas veces llamados de archivos 'Acrobat', nombre del software
 PDF del Adobe. Xpdf fue proyectado para ser pequeÒo y eficiente. Usa
-fuentes padrÛn X y no necesita de las bibliotecas Motif el Xt.
+fuentes padrÛn X.
 
 %description -l ja
 xpdf §œ Portable Document Format (PDF) •’•°•§•Î§Œ X Window System
@@ -51,15 +59,14 @@ xpdf §œ Portable Document Format (PDF) •’•°•§•Î§Œ X Window System
 %description -l pl
 Xpdf jest przegl±dark± plikÛw zapisanych w formacie PDF (Portable
 Document Format). Xpdf jest zaprojektowany tak, by byÊ ma≥ym i
-wydajnym programem. Nie korzysta z bibliotek Motif czy Xt, uøywa
-fontÛw z zasobÛw X Window.
+wydajnym programem. Uøywa fontÛw z zasobÛw X Window.
+%{?_without_protections:Ta wersja ignoruje blokady zarÛwno drukowania jak i kopiowania.}
 
 %description -l pt_BR
 Xpdf È um visualizador de arquivos PDF (Portable Document Format).
 (Estes s„o algumas vezes chamados de arquivos 'Acrobat', nome do
 software PDF da Adobe. Xpdf foi projetado para ser pequeno e
-eficiente. Ele usa fontes padr„o X e n„o precisa das bibliotecas Motif
-ou Xt.
+eficiente. Ele usa fontes padr„o X.
 
 %description -l ru
 Xpdf - ‹‘œ –“œ«“¡ÕÕ¡ ƒÃ— –“œ”Õœ‘“¡ ∆¡ Ãœ◊ ◊ ∆œ“Õ¡‘≈ Portable Document
@@ -71,10 +78,29 @@ Xpdf - √≈ –“œ«“¡Õ¡ ƒÃ— –≈“≈«Ã—ƒ’ ∆¡ Ã¶◊ ◊ ∆œ“Õ¡‘¶ Portable Document
 Format (PDF). ˜œŒ¡ €◊…ƒÀ¡   ≈∆≈À‘…◊Œ¡ ‘¡ ◊…Àœ“…”‘œ◊’§ ”‘¡Œƒ¡“‘Œ¶
 €“…∆‘… X Window.
 
+%package tools
+Summary:	Set of tools for viewing information and converting PDF files
+Summary(pl):	Zestaw narzÍdzi do wy∂wietlania informacji i konwertowania plikÛw PDF
+Group:		Applications/Publishing
+Provides:	pdftops
+Obsoletes:	pdftohtml-pdftops
+
+%description tools
+Set of utilities for displaying information about PDF-files (pdfinfo,
+pdffonts, pdfimages) and converting them (pdftopbm, pdftops,
+pdftotext).
+
+%description tools -l pl
+Zestaw programÛw do wy∂wietlania informacji o plikach PDF (pdfinfo,
+pdffonts, pdfimages) i konwertowania ich do innych formatÛw (pdftopbm,
+pdftops, pdftotext).
+
 %prep
 %setup -q
+%{?_without_protections:%patch0 -p1}
+%patch2 -p1
 cd xpdf
-%patch0 -p0
+%patch1 -p0
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
@@ -84,7 +110,8 @@ CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 	--enable-opi \
 	--enable-freetype2 \
 	--with-freetype2-includes=/usr/include/freetype2 \
-	--with-freetype-includes=/usr/include/freetype
+	--with-freetype-includes=/usr/include/freetype \
+	--with-Xm-includes=/usr/X11R6/include
 
 %{__make}
 
@@ -105,10 +132,15 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ANNOUNCE CHANGES README
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/xpdf
 %config(noreplace,missingok) %verify(not md5 size mtime) %{_sysconfdir}/*
 %{_datadir}/xpdf
-%{_mandir}/man1/*
-%{_mandir}/man5/*
+%{_mandir}/man1/xpdf.1*
+%{_mandir}/man5/xpdfrc.5*
 %{_applnkdir}/Graphics/Viewers/*
 %{_pixmapsdir}/*
+
+%files tools
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/pdf*
+%{_mandir}/man1/pdf*
