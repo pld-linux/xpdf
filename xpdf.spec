@@ -2,7 +2,7 @@ Summary:	Portable Document Format (PDF) file viewer
 Summary(pl):	Przegl±darka plików w formacie PDF
 Name:		xpdf
 Version:	0.80
-Release:	6
+Release:	7
 Group:		X11/Applications
 Group(pl):	X11/Aplikacje
 Copyright:	freeware
@@ -32,6 +32,7 @@ komputer klasy PC 486-66 z Linuxem na pok³adzie.
 %patch -p1
 
 %build
+autoconf
 CFLAGS="$RPM_OPT_FLAGS" CXXFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure %{_target} \
 	--prefix=/usr/X11R6 \
@@ -41,14 +42,15 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT/{usr/X11R6/{bin,man/man1},/etc/X11/applnk/Applications}
+install -d $RPM_BUILD_ROOT/{usr/X11R6/{bin,share/man/man1} \
+	$RPM_BUILD_ROOT/etc/X11/applnk/Applications
 
 make prefix=$RPM_BUILD_ROOT/usr/X11R6 install
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/X11/applnk/Applications/xpdf.desktop
 
 gzip -9nf ANNOUNCE CHANGES README \
-	$RPM_BUILD_ROOT/usr/X11R6/man/man1/*
+	$RPM_BUILD_ROOT/usr/X11R6/share/man/man1/*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -57,10 +59,14 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc {ANNOUNCE,CHANGES,README}.gz
 %attr(755,root,root) /usr/X11R6/bin/*
-/usr/X11R6/man/man1/*
+/usr/X11R6/share/man/man1/*
 /etc/X11/applnk/Applications/*
 
 %changelog
+* Tue May 11 1999 Piotr Czerwiñski <pius@pld.org.pl> 
+  [0.80-7]
+- package is FHS 2.0 compliant.
+
 * Wed Apr 21 1999 Piotr Czerwiñski <pius@pld.org.pl>
   [0.80-6]
 - recompiled on rpm 3.
