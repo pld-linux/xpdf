@@ -1,15 +1,14 @@
 Summary:	Portable Document Format (PDF) file viewer
 Summary(pl):	Przegl±darka plików w formacie PDF
 Name:		xpdf
-Version:	0.90
-Release:	3
+Version:	0.91
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Group(pl):	X11/Aplikacje
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tgz
-Source1:	xpdf.desktop
-Patch0:		http://www.fefe.de/xpdf-0.90-fefe-diff2.gz
-Patch1:		xpdf-DESTDIR.patch
+Source1:	%{name}.desktop
+Patch0:		%{name}-DESTDIR.patch
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
 BuildRequires:	libstdc++-devel
@@ -36,7 +35,6 @@ z zasobów X Wondow.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p0
 
 %build
 CFLAGS="$RPM_OPT_FLAGS"
@@ -44,7 +42,8 @@ CXXFLAGS="$RPM_OPT_FLAGS -fno-exceptions -fno-rtti"
 LDFLAGS="-s"
 export CFLAGS CXXFLAGS LDFLAGS
 %configure \
-	--with-gzip
+	--with-gzip \
+	--enable-opi
 %{__make}
 
 %install
