@@ -18,6 +18,7 @@ BuildPrereq:	XFree86-devel
 BuildRoot:	/tmp/%{name}-%{version}-root
 
 %define _prefix	/usr/X11R6
+%define _mandir %{_prefix}/man
 
 %description
 Xpdf is a viewer for Portable Document Format (PDF) files.  (These are also
