@@ -114,13 +114,13 @@ pdftops, pdftotext).
 %{__autoconf}
 CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 %configure \
-	--with-gzip \
 	--enable-a4-paper \
-	--enable-opi \
 	--enable-freetype2 \
 	--enable-multithreaded \
+	--enable-opi \
 	--enable-wordlist \
-	--with-freetype2-includes=/usr/include/freetype2
+	--with-freetype2-includes=/usr/include/freetype2 \
+	--with-gzip
 
 %{__make}
 
@@ -151,7 +151,7 @@ umask 022
 %defattr(644,root,root,755)
 %doc ANNOUNCE CHANGES README
 %attr(755,root,root) %{_bindir}/xpdf
-%config(noreplace,missingok) %verify(not md5 size mtime) %{_sysconfdir}/*
+%config(noreplace,missingok) %verify(not md5 mtime size) %{_sysconfdir}/*
 %{_datadir}/xpdf
 %{_mandir}/man1/xpdf.1*
 %{_mandir}/man5/xpdfrc.5*
