@@ -2,7 +2,6 @@
 # Conditional build:
 %bcond_without	protections	# remove protections against fair use (printing and copying)
 #
-
 Summary:	Portable Document Format (PDF) file viewer
 Summary(es):	Visualizador de archivos PDF
 Summary(ja):	X Window System ╓г╓н PDF ╔у╔║╔╓╔К╔Т╔Е║╪╔╒
@@ -11,24 +10,19 @@ Summary(pt_BR):	Visualizador de arquivos PDF
 Summary(ru):	Программа для просмотра PDF файлов
 Summary(uk):	Програма для перегляду PDF файл╕в
 Name:		xpdf
-Version:	3.00
-Release:	10
+Version:	3.01
+Release:	1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
-# Source0-md5:	95294cef3031dd68e65f331e8750b2c2
+# Source0-md5:	e004c69c7dddef165d768b1362b44268
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}rc
 Patch0:		%{name}-remove_protections.patch
-Patch1:		%{name}-freetype-includes.patch
-Patch2:		%{name}-fontdirs.patch
+Patch1:		%{name}-fontdirs.patch
 # probably obsolete
-Patch3:		%{name}-nonumericlocale.patch
-Patch4:		%{name}-intoverflow.patch
-Patch5:		%{name}-%{version}pl2.patch
-Patch6:		%{name}-%{version}pl3.patch
-Patch7:		%{name}-CAN-2005-2097.patch
+Patch2:		%{name}-nonumericlocale.patch
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
 BuildRequires:	XFree86-devel
@@ -106,11 +100,6 @@ pdftops, pdftotext).
 %setup -q
 %{!?with_protections:%patch0 -p1}
 %patch1 -p1
-%patch2 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
 
 %build
 %{__autoconf}
