@@ -13,7 +13,7 @@ Summary(ru):	Программа для просмотра PDF файлов
 Summary(uk):	Програма для перегляду PDF файл╕в
 Name:		xpdf
 Version:	3.01
-Release:	1
+Release:	1.1
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
@@ -24,6 +24,7 @@ Source3:	%{name}rc
 Patch0:		%{name}-remove_protections.patch
 # official security fix
 Patch1:		%{name}-nonumericlocale.patch
+Patch2:		%{name}-%{version}pl1.patch
 URL:		http://www.foolabs.com/xpdf/
 Icon:		xpdfIcon.gif
 BuildRequires:	XFree86-devel
@@ -101,6 +102,7 @@ pdftops, pdftotext).
 %setup -q
 %{!?with_protections:%patch0 -p1}
 #%patch1 -p1
+%patch2 -p1
 
 %build
 CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
