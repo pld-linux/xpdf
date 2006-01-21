@@ -25,7 +25,6 @@ Patch1:		%{name}-fontdirs.patch
 Patch2:		%{name}-nonumericlocale.patch
 Patch3:		%{name}-%{version}pl1.patch
 URL:		http://www.foolabs.com/xpdf/
-Icon:		xpdfIcon.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	freetype-devel >= 2.1.0
