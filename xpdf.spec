@@ -2,8 +2,6 @@
 # Conditional build:
 %bcond_without	protections	# remove protections against fair use (printing and copying)
 #
-%define		_pl	pl2
-
 Summary:	Portable Document Format (PDF) file viewer
 Summary(es):	Visualizador de archivos PDF
 Summary(ja):	X Window System ╓г╓н PDF ╔у╔║╔╓╔К╔Т╔Е║╪╔╒
@@ -12,25 +10,22 @@ Summary(pt_BR):	Visualizador de arquivos PDF
 Summary(ru):	Программа для просмотра PDF файлов
 Summary(uk):	Програма для перегляду PDF файл╕в
 Name:		xpdf
-Version:	3.00
-Release:	7
+Version:	3.01
+Release:	4
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
-# Source0-md5:	95294cef3031dd68e65f331e8750b2c2
+# Source0-md5:	e004c69c7dddef165d768b1362b44268
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}rc
 Patch0:		%{name}-remove_protections.patch
-Patch1:		%{name}-freetype-includes.patch
-Patch2:		%{name}-fontdirs.patch
+Patch1:		%{name}-fontdirs.patch
 # probably obsolete
-Patch3:		%{name}-nonumericlocale.patch
-Patch4:		%{name}-intoverflow.patch
-Patch5:		%{name}-%{version}%{_pl}.patch
-
+Patch2:		%{name}-nonumericlocale.patch
+Patch3:		%{name}-%{version}pl1.patch
+Patch4:		%{name}-cve-2006-0301.patch
 URL:		http://www.foolabs.com/xpdf/
-Icon:		xpdfIcon.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	freetype-devel >= 2.1.0
@@ -106,21 +101,20 @@ pdftops, pdftotext).
 %setup -q
 %{!?with_protections:%patch0 -p1}
 %patch1 -p1
-%patch2 -p1
+%patch3 -p1
 %patch4 -p1
-%patch5 -p1
 
 %build
 %{__autoconf}
 CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 %configure \
-	--with-gzip \
 	--enable-a4-paper \
-	--enable-opi \
 	--enable-freetype2 \
 	--enable-multithreaded \
+	--enable-opi \
 	--enable-wordlist \
-	--with-freetype2-includes=/usr/include/freetype2
+	--with-freetype2-includes=/usr/include/freetype2 \
+	--with-gzip
 
 %{__make}
 
@@ -151,7 +145,7 @@ umask 022
 %defattr(644,root,root,755)
 %doc ANNOUNCE CHANGES README
 %attr(755,root,root) %{_bindir}/xpdf
-%config(noreplace,missingok) %verify(not md5 size mtime) %{_sysconfdir}/*
+%config(noreplace,missingok) %verify(not md5 mtime size) %{_sysconfdir}/*
 %{_datadir}/xpdf
 %{_mandir}/man1/xpdf.1*
 %{_mandir}/man5/xpdfrc.5*

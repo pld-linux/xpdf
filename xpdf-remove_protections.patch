@@ -1,40 +1,19 @@
-diff -Nur xpdf-2.01.orig/xpdf/XPDFCore.cc xpdf-2.01/xpdf/XPDFCore.cc
---- xpdf-2.01.orig/xpdf/XPDFCore.cc	Sun Nov  3 23:15:37 2002
-+++ xpdf-2.01/xpdf/XPDFCore.cc	Mon Nov  4 21:08:51 2002
-@@ -906,9 +906,6 @@
- // global variables (currentSelection and currentSelectionOwner).
+--- xpdf-3.01/xpdf/XPDFCore.cc.orig	2005-08-17 07:34:31.000000000 +0200
++++ xpdf-3.01/xpdf/XPDFCore.cc	2005-08-28 11:07:57.279864520 +0200
+@@ -377,9 +377,6 @@
+   int pg;
+   double ulx, uly, lrx, lry;
  
- void XPDFCore::copySelection() {
 -  if (!doc->okToCopy()) {
 -    return;
 -  }
-   if (currentSelection) {
-     delete currentSelection;
-   }
-@@ -947,9 +944,6 @@
- }
- 
- GString *XPDFCore::extractText(int xMin, int yMin, int xMax, int yMax) {
--  if (!doc->okToCopy()) {
--    return NULL;
--  }
-   return out->getText(xMin, yMin, xMax, yMax);
- }
- 
-@@ -958,9 +952,6 @@
-   TextOutputDev *textOut;
-   GString *s;
- 
--  if (!doc->okToCopy()) {
--    return NULL;
--  }
-   textOut = new TextOutputDev(NULL, gTrue, gFalse, gFalse);
-   if (!textOut->isOk()) {
-     delete textOut;
-@@ -1585,10 +1576,9 @@
+   if (getSelection(&pg, &ulx, &uly, &lrx, &lry)) {
+     //~ for multithreading: need a mutex here
+     if (currentSelection) {
+@@ -1108,10 +1105,9 @@
  #ifndef NO_TEXT_SELECT
- 	  if (core->selectXMin != core->selectXMax &&
- 	      core->selectYMin != core->selectYMax) {
+ 	  if (core->selectULX != core->selectLRX &&
+ 	      core->selectULY != core->selectLRY) {
 -	    if (core->doc->okToCopy()) {
 -	      core->copySelection();
 -	    } else {
@@ -86,3 +65,15 @@ diff -Nur xpdf-2.00.orig/xpdf/pdftotext.cc xpdf-2.00/xpdf/pdftotext.cc
    }
  
    // construct text file name
+--- xpdf-3.01/xpdf/PDFCore.cc.orig	2005-08-17 07:34:31.000000000 +0200
++++ xpdf-3.01/xpdf/PDFCore.cc	2005-08-28 11:08:37.884691648 +0200
+@@ -1273,9 +1273,6 @@
+   int x0, y0, x1, y1, t;
+   GString *s;
+ 
+-  if (!doc->okToCopy()) {
+-    return NULL;
+-  }
+   if ((page = findPage(pg))) {
+     cvtUserToDev(pg, xMin, yMin, &x0, &y0);
+     cvtUserToDev(pg, xMax, yMax, &x1, &y1);
