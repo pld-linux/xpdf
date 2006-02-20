@@ -1,6 +1,7 @@
 #
 # Conditional build:
 %bcond_without	protections	# remove protections against fair use (printing and copying)
+%bcond_without	x		# X-based browser
 #
 Summary:	Portable Document Format (PDF) file viewer
 Summary(es):	Visualizador de archivos PDF
@@ -26,11 +27,11 @@ Patch2:		%{name}-nonumericlocale.patch
 Patch3:		%{name}-%{version}pl1.patch
 Patch4:		%{name}-cve-2006-0301.patch
 URL:		http://www.foolabs.com/xpdf/
-BuildRequires:	XFree86-devel
+%{?with_x:BuildRequires:	BuildRequires:	XFree86-devel}
 BuildRequires:	autoconf
 BuildRequires:	freetype-devel >= 2.1.0
 BuildRequires:	libstdc++-devel
-BuildRequires:	motif-devel
+%{?with_x:BuildRequires:BuildRequires:	motif-devel}
 BuildRequires:	t1lib-devel >= 1.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -106,6 +107,7 @@ pdftops, pdftotext).
 
 %build
 %{__autoconf}
+%{!?with_x:export no_x=yes}
 CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 %configure \
 	--enable-a4-paper \
@@ -141,6 +143,7 @@ umask 022
 umask 022
 [ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1
 
+%if %{with x}
 %files
 %defattr(644,root,root,755)
 %doc ANNOUNCE CHANGES README
@@ -151,6 +154,7 @@ umask 022
 %{_mandir}/man5/xpdfrc.5*
 %{_desktopdir}/*
 %{_pixmapsdir}/*
+%endif
 
 %files tools
 %defattr(644,root,root,755)
