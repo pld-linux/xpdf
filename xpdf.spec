@@ -27,11 +27,11 @@ Patch2:		%{name}-nonumericlocale.patch
 Patch3:		%{name}-%{version}pl1.patch
 Patch4:		%{name}-cve-2006-0301.patch
 URL:		http://www.foolabs.com/xpdf/
-%{?with_x:BuildRequires:	BuildRequires:	XFree86-devel}
+%{?with_x:BuildRequires:	xorg-lib-libX11-devel}
 BuildRequires:	autoconf
 BuildRequires:	freetype-devel >= 2.1.0
 BuildRequires:	libstdc++-devel
-%{?with_x:BuildRequires:BuildRequires:	motif-devel}
+%{?with_x:BuildRequires:	motif-devel}
 BuildRequires:	t1lib-devel >= 1.3.0
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
