@@ -1,4 +1,7 @@
 #
+# TODO: patch for freetype 2.2.x:
+# http://www.freetype.org/freetype2/patches/xpdf-3.01-noftinternals.patch
+#
 # Conditional build:
 %bcond_without	protections	# remove protections against fair use (printing and copying)
 %bcond_without	x		# X-based browser
