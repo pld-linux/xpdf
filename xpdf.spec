@@ -29,6 +29,7 @@ Patch1:		%{name}-fontdirs.patch
 Patch2:		%{name}-nonumericlocale.patch
 Patch3:		%{name}-%{version}pl2.patch
 Patch4:		%{name}-cve-2006-0301.patch
+Patch5:		%{name}-noftinternals.patch
 URL:		http://www.foolabs.com/xpdf/
 %{?with_x:BuildRequires:	xorg-lib-libX11-devel}
 BuildRequires:	autoconf
@@ -107,6 +108,7 @@ pdftops, pdftotext).
 %patch1 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 %build
 %{__autoconf}
