@@ -155,7 +155,7 @@ umask 022
 %{_datadir}/xpdf
 %{_mandir}/man1/xpdf.1*
 %{_mandir}/man5/xpdfrc.5*
-%{_desktopdir}/*
+%{_desktopdir}/*.desktop
 %{_pixmapsdir}/*
 %endif
 
