@@ -4,12 +4,12 @@
 %bcond_without	x		# X-based browser
 #
 Summary:	Portable Document Format (PDF) file viewer
-Summary(es.UTF-8):   Visualizador de archivos PDF
-Summary(ja.UTF-8):   X Window System での PDF ファイルヴューア
-Summary(pl.UTF-8):   Przeglądarka plików w formacie PDF
-Summary(pt_BR.UTF-8):   Visualizador de arquivos PDF
-Summary(ru.UTF-8):   Программа для просмотра PDF файлов
-Summary(uk.UTF-8):   Програма для перегляду PDF файлів
+Summary(es.UTF-8):	Visualizador de archivos PDF
+Summary(ja.UTF-8):	X Window System での PDF ファイルヴューア
+Summary(pl.UTF-8):	Przeglądarka plików w formacie PDF
+Summary(pt_BR.UTF-8):	Visualizador de arquivos PDF
+Summary(ru.UTF-8):	Программа для просмотра PDF файлов
+Summary(uk.UTF-8):	Програма для перегляду PDF файлів
 Name:		xpdf
 Version:	3.01
 <<<<<<< xpdf.spec
@@ -93,7 +93,7 @@ Format (PDF). Вона швидка й ефективна та використ�
 
 %package tools
 Summary:	Set of tools for viewing information and converting PDF files
-Summary(pl.UTF-8):   Zestaw narzędzi do wyświetlania informacji i konwertowania plików PDF
+Summary(pl.UTF-8):	Zestaw narzędzi do wyświetlania informacji i konwertowania plików PDF
 Group:		Applications/Publishing
 Provides:	pdftops
 Obsoletes:	pdftohtml-pdftops
