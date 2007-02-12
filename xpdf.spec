@@ -4,15 +4,19 @@
 %bcond_without	x		# X-based browser
 #
 Summary:	Portable Document Format (PDF) file viewer
-Summary(es):	Visualizador de archivos PDF
-Summary(ja):	X Window System ╓г╓н PDF ╔у╔║╔╓╔К╔Т╔Е║╪╔╒
-Summary(pl):	Przegl╠darka plikСw w formacie PDF
-Summary(pt_BR):	Visualizador de arquivos PDF
-Summary(ru):	Программа для просмотра PDF файлов
-Summary(uk):	Програма для перегляду PDF файл╕в
+Summary(es.UTF-8):   Visualizador de archivos PDF
+Summary(ja.UTF-8):   X Window System Ц│╖Ц│╝ PDF Ц┐∙Ц┌║Ц┌╓Ц┐╚Ц┐╢Ц┐╔Ц┐╪Ц┌╒
+Summary(pl.UTF-8):   Przeglд┘darka plikцЁw w formacie PDF
+Summary(pt_BR.UTF-8):   Visualizador de arquivos PDF
+Summary(ru.UTF-8):   п÷я─п╬пЁя─п╟п╪п╪п╟ п╢п╩я▐ п©я─п╬я│п╪п╬я┌я─п╟ PDF я└п╟п╧п╩п╬п╡
+Summary(uk.UTF-8):   п÷я─п╬пЁя─п╟п╪п╟ п╢п╩я▐ п©п╣я─п╣пЁп╩я▐п╢я┐ PDF я└п╟п╧п╩я√п╡
 Name:		xpdf
 Version:	3.01
+<<<<<<< xpdf.spec
+Release:	4.1
+=======
 Release:	5
+>>>>>>> 1.103
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
@@ -26,8 +30,12 @@ Patch1:		%{name}-fontdirs.patch
 Patch2:		%{name}-nonumericlocale.patch
 Patch3:		%{name}-%{version}pl2.patch
 Patch4:		%{name}-cve-2006-0301.patch
+<<<<<<< xpdf.spec
+Patch5:		%{name}-plfix.patch
+=======
 # http://www.freetype.org/freetype2/patches/xpdf-3.01-noftinternals.patch
 Patch5:		%{name}-noftinternals.patch
+>>>>>>> 1.103
 URL:		http://www.foolabs.com/xpdf/
 %{?with_x:BuildRequires:	xorg-lib-libX11-devel}
 BuildRequires:	autoconf
@@ -47,45 +55,45 @@ Acrobat (Adobe's PDF viewer). Xpdf is a small and efficient program
 which uses standard X fonts.
 %{!?with_protections:This version ignores protections for both: printing and copying.}
 
-%description -l es
+%description -l es.UTF-8
 Xpdf es un visor de archivos PDF (Portable Document Format). (Estos
 son algunas veces llamados de archivos 'Acrobat', nombre del software
-PDF del Adobe. Xpdf fue proyectado para ser pequeЯo y eficiente. Usa
-fuentes padrСn X.
+PDF del Adobe. Xpdf fue proyectado para ser pequeц╠o y eficiente. Usa
+fuentes padrцЁn X.
 
-%description -l ja
-xpdf ╓о Portable Document Format (PDF) ╔у╔║╔╓╔К╓н X Window System
-╬Е╓г╓н ╔Т╔Е║╪╔╒╓г╓╧║ёPDF ╔у╔║╔╓╔К╓о Adobe Acrobat (Adobe ╓н PDF
-╔Т╔Е║╪╔╒) ╓к╓а╓й╓С╓г║╒ ╩Ч║╧ Acrobat ╔у╔║╔╓╔К╓х╦ф╓п╓Л╓ч╓╧║ёxpdf
-╓о╬╝╓╣╓╞║╒и╦╫Юе╙╓й X ╓н╔у╔╘╔С╔х╓Р ╩х╓╕╦З╡ле╙╓й╔в╔М╔╟╔И╔Ю╓г╓╧║ё PDF
-╔у╔║╔╓╔К╓н╔Т╔Е║╪╔╒╓╛и╛мв╓й╓И╓п║╒xpdf
-╔я╔ц╔╠║╪╔╦╓Р╔╓╔С╔╧╔х║╪╔К╓╥╓ч╓╥╓Г╓╕║ё
+%description -l ja.UTF-8
+xpdf Ц│╞ Portable Document Format (PDF) Ц┐∙Ц┌║Ц┌╓Ц┐╚Ц│╝ X Window System
+Д╦┼Ц│╖Ц│╝ Ц┐╢Ц┐╔Ц┐╪Ц┌╒Ц│╖Ц│≥Ц─┌PDF Ц┐∙Ц┌║Ц┌╓Ц┐╚Ц│╞ Adobe Acrobat (Adobe Ц│╝ PDF
+Ц┐╢Ц┐╔Ц┐╪Ц┌╒) Ц│╚Ц│║Ц│╙Ц┌⌠Ц│╖Ц─│ Ф≥┌Ц─┘ Acrobat Ц┐∙Ц┌║Ц┌╓Ц┐╚Ц│╗Е▒╪Ц│╟Ц┌▄Ц│╬Ц│≥Ц─┌xpdf
+Ц│╞Е╟▐Ц│∙Ц│▐Ц─│Ф╗≥Ф╨√Г └Ц│╙ X Ц│╝Ц┐∙Ц┌╘Ц┐ЁЦ┐┬Ц┌▓ Д╫©Ц│├Е┼╧Ф·°Г └Ц│╙Ц┐≈Ц┐╜Ц┌╟Ц┐╘Ц┐═Ц│╖Ц│≥Ц─┌ PDF
+Ц┐∙Ц┌║Ц┌╓Ц┐╚Ц│╝Ц┐╢Ц┐╔Ц┐╪Ц┌╒Ц│▄Е©┘Х╕│Ц│╙Ц┌┴Ц│╟Ц─│xpdf
+Ц┐▒Ц┐┐Ц┌╠Ц┐╪Ц┌╦Ц┌▓Ц┌╓Ц┐ЁЦ┌╧Ц┐┬Ц┐╪Ц┐╚Ц│≈Ц│╬Ц│≈Ц┌┤Ц│├Ц─┌
 
-%description -l pl
-Xpdf jest przegl╠dark╠ plikСw zapisanych w formacie PDF (Portable
-Document Format). Xpdf jest zaprojektowany tak, by byФ maЁym i
-wydajnym programem. U©ywa fontСw z zasobСw X Window.
-%{!?with_protections:Ta wersja ignoruje blokady zarСwno drukowania jak i kopiowania.}
+%description -l pl.UTF-8
+Xpdf jest przeglд┘darkд┘ plikцЁw zapisanych w formacie PDF (Portable
+Document Format). Xpdf jest zaprojektowany tak, by byд┤ maе┌ym i
+wydajnym programem. Uе╪ywa fontцЁw z zasobцЁw X Window.
+%{!?with_protections:Ta wersja ignoruje blokady zarцЁwno drukowania jak i kopiowania.}
 
-%description -l pt_BR
-Xpdf И um visualizador de arquivos PDF (Portable Document Format).
-(Estes sЦo algumas vezes chamados de arquivos 'Acrobat', nome do
+%description -l pt_BR.UTF-8
+Xpdf ц╘ um visualizador de arquivos PDF (Portable Document Format).
+(Estes sцёo algumas vezes chamados de arquivos 'Acrobat', nome do
 software PDF da Adobe. Xpdf foi projetado para ser pequeno e
-eficiente. Ele usa fontes padrЦo X.
+eficiente. Ele usa fontes padrцёo X.
 
-%description -l ru
-Xpdf - это программа для просмотра файлов в формате Portable Document
-Format (PDF). Она быстрая и эффективная и использует стандартные
-шрифты X Window.
+%description -l ru.UTF-8
+Xpdf - я█я┌п╬ п©я─п╬пЁя─п╟п╪п╪п╟ п╢п╩я▐ п©я─п╬я│п╪п╬я┌я─п╟ я└п╟п╧п╩п╬п╡ п╡ я└п╬я─п╪п╟я┌п╣ Portable Document
+Format (PDF). п·п╫п╟ п╠я▀я│я┌я─п╟я▐ п╦ я█я└я└п╣п╨я┌п╦п╡п╫п╟я▐ п╦ п╦я│п©п╬п╩я▄п╥я┐п╣я┌ я│я┌п╟п╫п╢п╟я─я┌п╫я▀п╣
+я┬я─п╦я└я┌я▀ X Window.
 
-%description -l uk
-Xpdf - це програма для перегляду файл╕в в формат╕ Portable Document
-Format (PDF). Вона швидка й ефективна та використову╓ стандартн╕
-шрифти X Window.
+%description -l uk.UTF-8
+Xpdf - я├п╣ п©я─п╬пЁя─п╟п╪п╟ п╢п╩я▐ п©п╣я─п╣пЁп╩я▐п╢я┐ я└п╟п╧п╩я√п╡ п╡ я└п╬я─п╪п╟я┌я√ Portable Document
+Format (PDF). п▓п╬п╫п╟ я┬п╡п╦п╢п╨п╟ п╧ п╣я└п╣п╨я┌п╦п╡п╫п╟ я┌п╟ п╡п╦п╨п╬я─п╦я│я┌п╬п╡я┐я■ я│я┌п╟п╫п╢п╟я─я┌п╫я√
+я┬я─п╦я└я┌п╦ X Window.
 
 %package tools
 Summary:	Set of tools for viewing information and converting PDF files
-Summary(pl):	Zestaw narzЙdzi do wy╤wietlania informacji i konwertowania plikСw PDF
+Summary(pl.UTF-8):   Zestaw narzд≥dzi do wyе⌡wietlania informacji i konwertowania plikцЁw PDF
 Group:		Applications/Publishing
 Provides:	pdftops
 Obsoletes:	pdftohtml-pdftops
@@ -95,9 +103,9 @@ Set of utilities for displaying information about PDF-files (pdfinfo,
 pdffonts, pdfimages) and converting them (pdftopbm, pdftops,
 pdftotext).
 
-%description tools -l pl
-Zestaw programСw do wy╤wietlania informacji o plikach PDF (pdfinfo,
-pdffonts, pdfimages) i konwertowania ich do innych formatСw (pdftopbm,
+%description tools -l pl.UTF-8
+Zestaw programцЁw do wyе⌡wietlania informacji o plikach PDF (pdfinfo,
+pdffonts, pdfimages) i konwertowania ich do innych formatцЁw (pdftopbm,
 pdftops, pdftotext).
 
 %prep
