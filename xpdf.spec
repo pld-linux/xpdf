@@ -29,6 +29,7 @@ URL:		http://www.foolabs.com/xpdf/
 %{?with_x:BuildRequires:	xorg-lib-libX11-devel}
 BuildRequires:	autoconf
 BuildRequires:	freetype-devel >= 2.1.0
+BuildRequires:	libpaper-devel
 BuildRequires:	libstdc++-devel
 %{?with_x:BuildRequires:	motif-devel}
 BuildRequires:	t1lib-devel >= 1.3.0
