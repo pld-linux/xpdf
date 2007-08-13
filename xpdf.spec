@@ -24,6 +24,7 @@ Patch0:		%{name}-remove_protections.patch
 Patch1:		%{name}-fontdirs.patch
 # probably obsoleted
 Patch2:		%{name}-nonumericlocale.patch
+Patch3:		%{name}-3.02pl1.patch
 Patch4:		%{name}-cve-2006-0301.patch
 URL:		http://www.foolabs.com/xpdf/
 %{?with_x:BuildRequires:	xorg-lib-libX11-devel}
