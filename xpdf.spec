@@ -12,7 +12,7 @@ Summary(ru.UTF-8):	Программа для просмотра PDF файлов
 Summary(uk.UTF-8):	Програма для перегляду PDF файлів
 Name:		xpdf
 Version:	3.02
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
