@@ -26,7 +26,6 @@ Patch2:		%{name}-3.02pl1.patch
 Patch3:		%{name}-3.02pl2.patch
 # probably obsoleted
 Patch4:		%{name}-nonumericlocale.patch
-Patch5:		%{name}-cve-2006-0301.patch
 URL:		http://www.foolabs.com/xpdf/
 %{?with_x:BuildRequires:	xorg-lib-libX11-devel}
 BuildRequires:	autoconf
