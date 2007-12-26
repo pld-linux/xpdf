@@ -1,15 +1,14 @@
 [Desktop Entry]
 Version=1.0
-Encoding=UTF-8
 Name=Xpdf
 Comment=Views Adobe PDF files
 Comment[de]=PDF-Betrachter
 Comment[pl]=Przeglądarka plików Adobe PDF
 Comment[sv]=Visar Adobe PDF-filer
-Icon=xpdf.png
+Icon=xpdf
 Exec=xpdf
 Terminal=false
 Type=Application
-MimeType=application/pdf
+MimeType=application/pdf;
 Categories=Graphics;Viewer;
 # vi: encoding=utf-8
