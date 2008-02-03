@@ -1,4 +1,9 @@
 #
+# TODO:
+#	- separate subpackage with /etc/xpdfrc file; pdftotext
+#	  from xpdf-tools or poppler-progs can use language
+#	  support files but don't require entire xpdf
+#
 # Conditional build:
 %bcond_without	protections	# remove protections against fair use (printing and copying)
 %bcond_without	x		# X-based browser
