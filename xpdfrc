@@ -84,7 +84,7 @@ fontDir			/usr/share/fonts/TTF
 # the rasterizer entirely).
 
 #enableT1lib		yes
-#enableFreeType		yes
+enableFreeType		yes
 #antialias		yes
 
 # Set the command used to run a web browser when a URL hyperlink is
