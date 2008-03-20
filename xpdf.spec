@@ -39,6 +39,7 @@ BuildRequires:	libpaper-devel
 BuildRequires:	libstdc++-devel
 %{?with_x:BuildRequires:	motif-devel}
 BuildRequires:	t1lib-devel >= 1.3.0
+Suggests:	ghostscript-fonts-std
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libXm.so.1 libXm.so.2
