@@ -32,6 +32,11 @@ Patch3:		%{name}-3.02pl2.patch
 # probably obsoleted
 Patch4:		%{name}-nonumericlocale.patch
 URL:		http://www.foolabs.com/xpdf/
+# Fix: ftp://ftp.foolabs.com/pub/xpdf/xpdf-3.02pl3.patch
+BuildRequires:	security(CVE-2009-0799)
+BuildRequires:	security(CVE-2009-1181)
+BuildRequires:	security(CVE-2009-1183)
+####
 %{?with_x:BuildRequires:	xorg-lib-libX11-devel}
 BuildRequires:	autoconf
 BuildRequires:	freetype-devel >= 2.1.0
