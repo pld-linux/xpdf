@@ -36,6 +36,13 @@ URL:		http://www.foolabs.com/xpdf/
 BuildRequires:	security(CVE-2009-0799)
 BuildRequires:	security(CVE-2009-1181)
 BuildRequires:	security(CVE-2009-1183)
+BuildRequires:	security(CVE-2009-0146)
+BuildRequires:	security(CVE-2009-0147)
+BuildRequires:	security(CVE-2009-0166)
+BuildRequires:	security(CVE-2009-0800)
+BuildRequires:	security(CVE-2009-1179)
+BuildRequires:	security(CVE-2009-1180)
+BuildRequires:	security(CVE-2009-1182)
 ####
 %{?with_x:BuildRequires:	xorg-lib-libX11-devel}
 BuildRequires:	autoconf
