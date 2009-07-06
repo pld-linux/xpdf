@@ -17,7 +17,7 @@ Summary(ru.UTF-8):	Программа для просмотра PDF файлов
 Summary(uk.UTF-8):	Програма для перегляду PDF файлів
 Name:		xpdf
 Version:	3.02
-Release:	5
+Release:	6
 License:	GPL
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
@@ -27,23 +27,12 @@ Source2:	%{name}.png
 Source3:	%{name}rc
 Patch0:		%{name}-remove_protections.patch
 Patch1:		%{name}-fontdirs.patch
-Patch2:		%{name}-3.02pl1.patch
-Patch3:		%{name}-3.02pl2.patch
+Patch2:		%{name}-%{version}pl1.patch
+Patch3:		%{name}-%{version}pl2.patch
+Patch4:		%{name}-%{version}pl3.patch
 # probably obsoleted
-Patch4:		%{name}-nonumericlocale.patch
+Patch5:		%{name}-nonumericlocale.patch
 URL:		http://www.foolabs.com/xpdf/
-# Fix: ftp://ftp.foolabs.com/pub/xpdf/xpdf-3.02pl3.patch
-BuildRequires:	security(CVE-2009-0799)
-BuildRequires:	security(CVE-2009-1181)
-BuildRequires:	security(CVE-2009-1183)
-BuildRequires:	security(CVE-2009-0146)
-BuildRequires:	security(CVE-2009-0147)
-BuildRequires:	security(CVE-2009-0166)
-BuildRequires:	security(CVE-2009-0800)
-BuildRequires:	security(CVE-2009-1179)
-BuildRequires:	security(CVE-2009-1180)
-BuildRequires:	security(CVE-2009-1182)
-####
 %{?with_x:BuildRequires:	xorg-lib-libX11-devel}
 BuildRequires:	autoconf
 BuildRequires:	freetype-devel >= 2.1.0
@@ -123,6 +112,7 @@ pdftops, pdftotext).
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 %build
 %{__autoconf}
