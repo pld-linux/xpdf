@@ -1,12 +1,15 @@
---- xpdf-3.00/xpdf/GlobalParams.cc.orig	2004-01-22 02:26:45.000000000 +0100
-+++ xpdf-3.00/xpdf/GlobalParams.cc	2004-01-25 16:22:04.270214784 +0100
-@@ -81,8 +81,7 @@
+--- xpdf-3.03/xpdf/GlobalParams.cc.orig	2011-08-15 23:08:53.000000000 +0200
++++ xpdf-3.03/xpdf/GlobalParams.cc	2011-08-21 08:31:54.652749969 +0200
+@@ -110,11 +110,7 @@
  };
- 
- static char *displayFontDirs[] = {
+ #else
+ static const char *displayFontDirs[] = {
 -  "/usr/share/ghostscript/fonts",
 -  "/usr/local/share/ghostscript/fonts",
+-  "/usr/share/fonts/default/Type1",
+-  "/usr/share/fonts/default/ghostscript",
+-  "/usr/share/fonts/type1/gsfonts",
 +  "/usr/share/fonts/Type1",
-   "/usr/share/fonts/default/Type1",
    NULL
  };
+ #endif

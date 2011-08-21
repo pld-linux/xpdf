@@ -5,7 +5,7 @@
 #	  support files but don't require entire xpdf
 #
 # Conditional build:
-%bcond_with	protections	# remove protections against fair use (printing and copying)
+%bcond_with	protections	# protections against fair use (printing and copying)
 %bcond_without	x		# X-based browser
 #
 Summary:	Portable Document Format (PDF) file viewer
@@ -16,22 +16,17 @@ Summary(pt_BR.UTF-8):	Visualizador de arquivos PDF
 Summary(ru.UTF-8):	Программа для просмотра PDF файлов
 Summary(uk.UTF-8):	Програма для перегляду PDF файлів
 Name:		xpdf
-Version:	3.02
-Release:	9
-License:	GPL
+Version:	3.03
+Release:	1
+License:	GPL v2 or GPL v3
 Group:		X11/Applications
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
-# Source0-md5:	599dc4cc65a07ee868cf92a667a913d2
+# Source0-md5:	af75f772bee0e5ae4a811ff9d03eac5a
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}rc
 Patch0:		%{name}-remove_protections.patch
 Patch1:		%{name}-fontdirs.patch
-Patch2:		%{name}-%{version}pl1.patch
-Patch3:		%{name}-%{version}pl2.patch
-Patch4:		%{name}-%{version}pl3.patch
-Patch5:		%{name}-%{version}pl4.patch
-Patch6:		%{name}-%{version}pl5.patch
 URL:		http://www.foolabs.com/xpdf/
 %{?with_x:BuildRequires:	xorg-lib-libX11-devel}
 BuildRequires:	autoconf
@@ -39,7 +34,6 @@ BuildRequires:	freetype-devel >= 2.1.0
 BuildRequires:	libpaper-devel
 BuildRequires:	libstdc++-devel
 %{?with_x:BuildRequires:	motif-devel}
-BuildRequires:	t1lib-devel >= 1.3.0
 Suggests:	ghostscript-fonts-std
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -110,11 +104,6 @@ pdftops, pdftotext).
 %setup -q
 %{!?with_protections:%patch0 -p1}
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
 
 %build
 %{__autoconf}
@@ -159,15 +148,27 @@ umask 022
 %defattr(644,root,root,755)
 %doc ANNOUNCE CHANGES README
 %attr(755,root,root) %{_bindir}/xpdf
-%config(noreplace,missingok) %verify(not md5 mtime size) %{_sysconfdir}/*
+%config(noreplace,missingok) %verify(not md5 mtime size) %{_sysconfdir}/xpdfrc
 %{_datadir}/xpdf
 %{_mandir}/man1/xpdf.1*
 %{_mandir}/man5/xpdfrc.5*
-%{_desktopdir}/*.desktop
-%{_pixmapsdir}/*
+%{_desktopdir}/xpdf.desktop
+%{_pixmapsdir}/xpdf.png
 %endif
 
 %files tools
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/pdf*
-%{_mandir}/man1/pdf*
+%attr(755,root,root) %{_bindir}/pdfdetach
+%attr(755,root,root) %{_bindir}/pdffonts
+%attr(755,root,root) %{_bindir}/pdfimages
+%attr(755,root,root) %{_bindir}/pdfinfo
+%attr(755,root,root) %{_bindir}/pdftoppm
+%attr(755,root,root) %{_bindir}/pdftops
+%attr(755,root,root) %{_bindir}/pdftotext
+%{_mandir}/man1/pdfdetach.1*
+%{_mandir}/man1/pdffonts.1*
+%{_mandir}/man1/pdfimages.1*
+%{_mandir}/man1/pdfinfo.1*
+%{_mandir}/man1/pdftoppm.1*
+%{_mandir}/man1/pdftops.1*
+%{_mandir}/man1/pdftotext.1*
