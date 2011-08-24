@@ -2,44 +2,22 @@
 
 #----- display fonts
 
-# These map the Base-14 fonts to standard X server fonts.
-# These are default mappings, built into xpdf - they're shown here
-# purely as examples.
+# These map the Base-14 fonts to the Type 1 fonts shipped with ghostscript.
 
-#displayFontX	Courier			"-*-courier-medium-r-normal-*-%s-*-*-*-*-*-iso8859-1"		Latin1
-#displayFontX	Courier-Bold		"-*-courier-bold-r-normal-*-%s-*-*-*-*-*-iso8859-1"		Latin1
-#displayFontX	Courier-BoldOblique	"-*-courier-bold-o-normal-*-%s-*-*-*-*-*-iso8859-1"		Latin1
-#displayFontX	Courier-Oblique		"-*-courier-medium-o-normal-*-%s-*-*-*-*-*-iso8859-1"		Latin1
-#displayFontX	Helvetica		"-*-helvetica-medium-r-normal-*-%s-*-*-*-*-*-iso8859-1"		Latin1
-#displayFontX	Helvetica-Bold		"-*-helvetica-bold-r-normal-*-%s-*-*-*-*-*-iso8859-1"		Latin1
-#displayFontX	Helvetica-BoldOblique	"-*-helvetica-bold-o-normal-*-%s-*-*-*-*-*-iso8859-1"		Latin1
-#displayFontX	Helvetica-Oblique	"-*-helvetica-medium-o-normal-*-%s-*-*-*-*-*-iso8859-1"		Latin1
-#displayFontX	Symbol			"-*-symbol-medium-r-normal-*-%s-*-*-*-*-*-adobe-fontspecific"	Symbol
-#displayFontX	Times-Bold		"-*-times-bold-r-normal-*-%s-*-*-*-*-*-iso8859-1"		Latin1
-#displayFontX	Times-BoldItalic	"-*-times-bold-i-normal-*-%s-*-*-*-*-*-iso8859-1"		Latin1
-#displayFontX	Times-Italic		"-*-times-medium-i-normal-*-%s-*-*-*-*-*-iso8859-1"		Latin1
-#displayFontX	Times-Roman		"-*-times-medium-r-normal-*-%s-*-*-*-*-*-iso8859-1"		Latin1
-#displayFontX	ZapfDingbats		"-*-zapfdingbats-medium-r-normal-*-%s-*-*-*-*-*-*-*"		ZapfDingbats
-
-# These map the Base-14 fonts to the Type 1 fonts that ship with
-# ghostscript.  You'll almost certainly want to use something like
-# this, but you'll need to adjust this to point to wherever
-# ghostscript is installed on your system.
-
-#displayFontT1 Times-Roman		/usr/share/fonts/Type1/n021003l.pfb
-#displayFontT1 Times-Italic		/usr/share/fonts/Type1/n021023l.pfb
-#displayFontT1 Times-Bold		/usr/share/fonts/Type1/n021004l.pfb
-#displayFontT1 Times-BoldItalic		/usr/share/fonts/Type1/n021024l.pfb
-#displayFontT1 Helvetica		/usr/share/fonts/Type1/n019003l.pfb
-#displayFontT1 Helvetica-Oblique	/usr/share/fonts/Type1/n019023l.pfb
-#displayFontT1 Helvetica-Bold		/usr/share/fonts/Type1/n019004l.pfb
-#displayFontT1 Helvetica-BoldOblique	/usr/share/fonts/Type1/n019024l.pfb
-#displayFontT1 Courier			/usr/share/fonts/Type1/n022003l.pfb
-#displayFontT1 Courier-Oblique		/usr/share/fonts/Type1/n022023l.pfb
-#displayFontT1 Courier-Bold		/usr/share/fonts/Type1/n022004l.pfb
-#displayFontT1 Courier-BoldOblique	/usr/share/fonts/Type1/n022024l.pfb
-#displayFontT1 Symbol			/usr/share/fonts/Type1/s050000l.pfb
-#displayFontT1 ZapfDingbats		/usr/share/fonts/Type1/d050000l.pfb
+#fontFile Times-Roman		/usr/share/fonts/Type1/n021003l.pfb
+#fontFile Times-Italic		/usr/share/fonts/Type1/n021023l.pfb
+#fontFile Times-Bold		/usr/share/fonts/Type1/n021004l.pfb
+#fontFile Times-BoldItalic		/usr/share/fonts/Type1/n021024l.pfb
+#fontFile Helvetica		/usr/share/fonts/Type1/n019003l.pfb
+#fontFile Helvetica-Oblique	/usr/share/fonts/Type1/n019023l.pfb
+#fontFile Helvetica-Bold		/usr/share/fonts/Type1/n019004l.pfb
+#fontFile Helvetica-BoldOblique	/usr/share/fonts/Type1/n019024l.pfb
+#fontFile Courier			/usr/share/fonts/Type1/n022003l.pfb
+#fontFile Courier-Oblique		/usr/share/fonts/Type1/n022023l.pfb
+#fontFile Courier-Bold		/usr/share/fonts/Type1/n022004l.pfb
+#fontFile Courier-BoldOblique	/usr/share/fonts/Type1/n022024l.pfb
+#fontFile Symbol			/usr/share/fonts/Type1/s050000l.pfb
+#fontFile ZapfDingbats		/usr/share/fonts/Type1/d050000l.pfb
 
 # If you need to display PDF files that refer to non-embedded fonts,
 # you should add one or more fontDir options to point to the
@@ -83,9 +61,9 @@ fontDir			/usr/share/fonts/TTF
 # or high (anti-aliasing), plain (no anti-aliasing), or none (disable
 # the rasterizer entirely).
 
-#enableT1lib		yes
 enableFreeType		yes
 #antialias		yes
+#disableFreeTypeHinting	yes
 
 # Set the command used to run a web browser when a URL hyperlink is
 # clicked.
