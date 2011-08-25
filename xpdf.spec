@@ -33,7 +33,7 @@ BuildRequires:	autoconf
 BuildRequires:	freetype-devel >= 2.1.0
 BuildRequires:	libpaper-devel
 BuildRequires:	libstdc++-devel
-%{?with_x:BuildRequires:	motif-devel}
+%{?with_x:BuildRequires:	motif-devel >= 2.2}
 Suggests:	ghostscript-fonts-std
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -115,8 +115,7 @@ CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 	--enable-multithreaded \
 	--enable-opi \
 	--enable-wordlist \
-	--with-freetype2-includes=/usr/include/freetype2 \
-	--with-gzip
+	--with-freetype2-includes=/usr/include/freetype2
 
 %{__make}
 
