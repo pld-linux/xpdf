@@ -7,7 +7,7 @@
 # Conditional build:
 %bcond_with	protections	# protections against fair use (printing and copying)
 %bcond_without	x		# X-based browser
-#
+
 Summary:	Portable Document Format (PDF) file viewer
 Summary(es.UTF-8):	Visualizador de archivos PDF
 Summary(ja.UTF-8):	X Window System での PDF ファイルヴューア
@@ -17,9 +17,9 @@ Summary(ru.UTF-8):	Программа для просмотра PDF файлов
 Summary(uk.UTF-8):	Програма для перегляду PDF файлів
 Name:		xpdf
 Version:	3.03
-Release:	1
+Release:	2
 License:	GPL v2 or GPL v3
-Group:		X11/Applications
+Group:		Applications/Publishing
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
 # Source0-md5:	af75f772bee0e5ae4a811ff9d03eac5a
 Source1:	%{name}.desktop
@@ -28,17 +28,19 @@ Source3:	%{name}rc
 Patch0:		%{name}-remove_protections.patch
 Patch1:		%{name}-fontdirs.patch
 URL:		http://www.foolabs.com/xpdf/
-%{?with_x:BuildRequires:	xorg-lib-libX11-devel}
 BuildRequires:	autoconf
 BuildRequires:	freetype-devel >= 2.1.0
 BuildRequires:	libpaper-devel
 BuildRequires:	libstdc++-devel
 %{?with_x:BuildRequires:	motif-devel >= 2.2}
+BuildRequires:	rpmbuild(macros) >= 1.596
+%{?with_x:BuildRequires:	xorg-lib-libX11-devel}
+Requires:	desktop-file-utils
 Suggests:	ghostscript-fonts-std
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_noautoreqdep	libXm.so.1 libXm.so.2
-%define		specflags_ia32	 -fomit-frame-pointer 
+%define		specflags_ia32	 -fomit-frame-pointer
 
 %description
 Xpdf is an X Window System based viewer for Portable Document Format
@@ -121,26 +123,22 @@ CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir}} \
-	$RPM_BUILD_ROOT%{_datadir}/xpdf
-
+install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_datadir}/xpdf}
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
-install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}
+cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
+cp -p %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
-umask 022
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
+%update_desktop_database
 
 %postun
-umask 022
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1
+%update_desktop_database
 
 %if %{with x}
 %files
