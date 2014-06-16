@@ -16,30 +16,33 @@ Summary(pt_BR.UTF-8):	Visualizador de arquivos PDF
 Summary(ru.UTF-8):	Программа для просмотра PDF файлов
 Summary(uk.UTF-8):	Програма для перегляду PDF файлів
 Name:		xpdf
-Version:	3.03
-Release:	2
+Version:	3.04
+Release:	1
 License:	GPL v2 or GPL v3
 Group:		Applications/Publishing
 Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
-# Source0-md5:	af75f772bee0e5ae4a811ff9d03eac5a
+# Source0-md5:	3bc86c69c8ff444db52461270bef3f44
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}rc
 Patch0:		%{name}-remove_protections.patch
 Patch1:		%{name}-fontdirs.patch
+Patch2:		%{name}-install.patch
 URL:		http://www.foolabs.com/xpdf/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.57
 BuildRequires:	freetype-devel >= 2.1.0
 BuildRequires:	libpaper-devel
+BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
 %{?with_x:BuildRequires:	motif-devel >= 2.2}
 BuildRequires:	rpmbuild(macros) >= 1.596
 %{?with_x:BuildRequires:	xorg-lib-libX11-devel}
+%{?with_x:BuildRequires:	xorg-lib-libXpm-devel}
+%{?with_x:BuildRequires:	xorg-lib-libXt-devel}
 Requires:	desktop-file-utils
 Suggests:	ghostscript-fonts-std
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_noautoreqdep	libXm.so.1 libXm.so.2
 %define		specflags_ia32	 -fomit-frame-pointer
 
 %description
@@ -106,6 +109,7 @@ pdftops, pdftotext).
 %setup -q
 %{!?with_protections:%patch0 -p1}
 %patch1 -p1
+%patch2 -p1
 
 %build
 %{__autoconf}
@@ -113,10 +117,9 @@ pdftops, pdftotext).
 CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
 %configure \
 	--enable-a4-paper \
-	--enable-freetype2 \
+	--enable-cmyk \
 	--enable-multithreaded \
 	--enable-opi \
-	--enable-wordlist \
 	--with-freetype2-includes=/usr/include/freetype2
 
 %{__make}
@@ -159,6 +162,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/pdffonts
 %attr(755,root,root) %{_bindir}/pdfimages
 %attr(755,root,root) %{_bindir}/pdfinfo
+%attr(755,root,root) %{_bindir}/pdftohtml
+%attr(755,root,root) %{_bindir}/pdftopng
 %attr(755,root,root) %{_bindir}/pdftoppm
 %attr(755,root,root) %{_bindir}/pdftops
 %attr(755,root,root) %{_bindir}/pdftotext
@@ -166,6 +171,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man1/pdffonts.1*
 %{_mandir}/man1/pdfimages.1*
 %{_mandir}/man1/pdfinfo.1*
+%{_mandir}/man1/pdftohtml.1*
+%{_mandir}/man1/pdftopng.1*
 %{_mandir}/man1/pdftoppm.1*
 %{_mandir}/man1/pdftops.1*
 %{_mandir}/man1/pdftotext.1*
