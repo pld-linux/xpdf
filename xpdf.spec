@@ -16,29 +16,27 @@ Summary(pt_BR.UTF-8):	Visualizador de arquivos PDF
 Summary(ru.UTF-8):	Программа для просмотра PDF файлов
 Summary(uk.UTF-8):	Програма для перегляду PDF файлів
 Name:		xpdf
-Version:	3.04
-Release:	2
+Version:	4.00
+Release:	1
 License:	GPL v2 or GPL v3
 Group:		Applications/Publishing
-Source0:	ftp://ftp.foolabs.com/pub/xpdf/%{name}-%{version}.tar.gz
-# Source0-md5:	3bc86c69c8ff444db52461270bef3f44
+Source0:	http://www.xpdfreader.com/dl/%{name}-%{version}.tar.gz
+# Source0-md5:	80c8ce77acf1d36de93cecb82bd64a0f
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}rc
 Patch0:		%{name}-remove_protections.patch
 Patch1:		%{name}-fontdirs.patch
-Patch2:		%{name}-install.patch
-URL:		http://www.foolabs.com/xpdf/
-BuildRequires:	autoconf >= 2.57
+URL:		http://www.xpdfreader.com/
+BuildRequires:	cmake >= 2.8.8
 BuildRequires:	freetype-devel >= 2.1.0
 BuildRequires:	libpaper-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
-%{?with_x:BuildRequires:	motif-devel >= 2.2}
+%{?with_x:BuildRequires:	QtCore-devel}
+%{?with_x:BuildRequires:	QtGui-devel}
+%{?with_x:BuildRequires:	qt4-qmake}
 BuildRequires:	rpmbuild(macros) >= 1.596
-%{?with_x:BuildRequires:	xorg-lib-libX11-devel}
-%{?with_x:BuildRequires:	xorg-lib-libXpm-devel}
-%{?with_x:BuildRequires:	xorg-lib-libXt-devel}
 Requires:	desktop-file-utils
 Suggests:	ghostscript-fonts-std
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -109,24 +107,22 @@ pdftops, pdftotext).
 %setup -q
 %{!?with_protections:%patch0 -p1}
 %patch1 -p1
-%patch2 -p1
+sed -e 's|DESTINATION man/|DESTINATION share/man/|g' -i xpdf{,-qt}/CMakeLists.txt
 
 %build
-%{__autoconf}
-%{!?with_x:export no_x=yes}
-CXXFLAGS="%{rpmcflags} -fno-exceptions -fno-rtti"
-%configure \
-	--enable-a4-paper \
-	--enable-cmyk \
-	--enable-multithreaded \
-	--enable-opi \
-	--with-freetype2-includes=/usr/include/freetype2
+%cmake . \
+	-DA4_PAPER=ON \
+	-DSPLASH_CMYK=ON \
+	-DOPI_SUPPORT=ON \
+	-DCMAKE_CXX_FLAGS="%{rpmcxxflags}" \
+	-DCMAKE_EXE_LINKER_FLAGS="-lpaper %{rpmldflags}"
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_desktopdir},%{_pixmapsdir},%{_datadir}/xpdf}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_desktopdir},%{_pixmapsdir},%{_datadir}/xpdf}
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
