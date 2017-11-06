@@ -17,7 +17,7 @@ Summary(ru.UTF-8):	Программа для просмотра PDF файлов
 Summary(uk.UTF-8):	Програма для перегляду PDF файлів
 Name:		xpdf
 Version:	4.00
-Release:	1
+Release:	2
 License:	GPL v2 or GPL v3
 Group:		Applications/Publishing
 Source0:	http://www.xpdfreader.com/dl/%{name}-%{version}.tar.gz
@@ -114,6 +114,7 @@ sed -e 's|DESTINATION man/|DESTINATION share/man/|g' -i xpdf{,-qt}/CMakeLists.tx
 	-DA4_PAPER=ON \
 	-DSPLASH_CMYK=ON \
 	-DOPI_SUPPORT=ON \
+	-DCMAKE_DISABLE_FIND_PACKAGE_Qt5Widgets=1 \
 	-DCMAKE_CXX_FLAGS="%{rpmcxxflags}" \
 	-DCMAKE_EXE_LINKER_FLAGS="-lpaper %{rpmldflags}"
 
