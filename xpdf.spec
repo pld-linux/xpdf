@@ -17,7 +17,7 @@ Summary(ru.UTF-8):	Программа для просмотра PDF файлов
 Summary(uk.UTF-8):	Програма для перегляду PDF файлів
 Name:		xpdf
 Version:	4.00
-Release:	2
+Release:	3
 License:	GPL v2 or GPL v3
 Group:		Applications/Publishing
 Source0:	http://www.xpdfreader.com/dl/%{name}-%{version}.tar.gz
