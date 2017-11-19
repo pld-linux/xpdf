@@ -17,7 +17,7 @@ Summary(ru.UTF-8):	Программа для просмотра PDF файлов
 Summary(uk.UTF-8):	Програма для перегляду PDF файлів
 Name:		xpdf
 Version:	4.00
-Release:	3
+Release:	4
 License:	GPL v2 or GPL v3
 Group:		Applications/Publishing
 Source0:	http://www.xpdfreader.com/dl/%{name}-%{version}.tar.gz
@@ -27,6 +27,7 @@ Source2:	%{name}.png
 Source3:	%{name}rc
 Patch0:		%{name}-remove_protections.patch
 Patch1:		%{name}-fontdirs.patch
+Patch2:		dynamic_private.patch
 URL:		http://www.xpdfreader.com/
 BuildRequires:	cmake >= 2.8.8
 BuildRequires:	freetype-devel >= 2.1.0
@@ -107,6 +108,7 @@ pdftops, pdftotext).
 %setup -q
 %{!?with_protections:%patch0 -p1}
 %patch1 -p1
+%patch2 -p1
 sed -e 's|DESTINATION man/|DESTINATION share/man/|g' -i xpdf{,-qt}/CMakeLists.txt
 
 %build
@@ -116,16 +118,19 @@ sed -e 's|DESTINATION man/|DESTINATION share/man/|g' -i xpdf{,-qt}/CMakeLists.tx
 	-DOPI_SUPPORT=ON \
 	-DCMAKE_DISABLE_FIND_PACKAGE_Qt5Widgets=1 \
 	-DCMAKE_CXX_FLAGS="%{rpmcxxflags}" \
+	-DCMAKE_INSTALL_RPATH="%{_libexecdir}/%{name}" \
 	-DCMAKE_EXE_LINKER_FLAGS="-lpaper %{rpmldflags}"
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_desktopdir},%{_pixmapsdir},%{_datadir}/xpdf}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_desktopdir},%{_pixmapsdir},{%{_datadir},%{_libexecdir}}/%{name}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+install {fofi/libfofi,goo/libgoo,splash/libsplash}.so $RPM_BUILD_ROOT%{_libexecdir}/%{name}
 
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
@@ -164,6 +169,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/pdftoppm
 %attr(755,root,root) %{_bindir}/pdftops
 %attr(755,root,root) %{_bindir}/pdftotext
+%attr(755,root,root) %{_libexecdir}/%{name}/lib*.so
 %{_mandir}/man1/pdfdetach.1*
 %{_mandir}/man1/pdffonts.1*
 %{_mandir}/man1/pdfimages.1*

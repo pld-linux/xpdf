@@ -1,0 +1,20 @@
+--- a/xpdf-qt/CMakeLists.txt.orig	2017-08-09 01:22:50.000000000 +0200
++++ b/xpdf-qt/CMakeLists.txt	2017-11-19 12:38:14.000000000 +0100
+@@ -63,9 +63,6 @@
+   endif ()
+ 
+   add_executable(xpdf
+-    $<TARGET_OBJECTS:goo_objs>
+-    $<TARGET_OBJECTS:fofi_objs>
+-    $<TARGET_OBJECTS:splash_objs>
+     $<TARGET_OBJECTS:xpdf_objs>
+     $<TARGET_OBJECTS:xpdf_widget_objs>
+     ${XPDFWIDGET_PRINT_MODULES}
+@@ -81,6 +78,7 @@
+     ${XPDF_ICONS}
+   )
+   target_link_libraries(xpdf ${QT_LIBRARIES} ${EXTRA_QT_LIBRARIES}
++			goo fofi splash
+                         ${FREETYPE_LIBRARY} ${FREETYPE_OTHER_LIBS}
+                         ${DTYPE_LIBRARY} ${LCMS_LIBRARY}
+                         ${CMAKE_THREAD_LIBS_INIT})
