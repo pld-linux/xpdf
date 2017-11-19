@@ -17,7 +17,7 @@ Summary(ru.UTF-8):	Программа для просмотра PDF файлов
 Summary(uk.UTF-8):	Програма для перегляду PDF файлів
 Name:		xpdf
 Version:	4.00
-Release:	4
+Release:	5
 License:	GPL v2 or GPL v3
 Group:		Applications/Publishing
 Source0:	http://www.xpdfreader.com/dl/%{name}-%{version}.tar.gz
@@ -169,6 +169,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/pdftoppm
 %attr(755,root,root) %{_bindir}/pdftops
 %attr(755,root,root) %{_bindir}/pdftotext
+%dir %{_libexecdir}/%{name}
 %attr(755,root,root) %{_libexecdir}/%{name}/lib*.so
 %{_mandir}/man1/pdfdetach.1*
 %{_mandir}/man1/pdffonts.1*
