@@ -10,8 +10,8 @@ Summary(pt_BR.UTF-8):	Visualizador de arquivos PDF
 Summary(ru.UTF-8):	Программа для просмотра PDF файлов
 Summary(uk.UTF-8):	Програма для перегляду PDF файлів
 Name:		xpdf
-Version:	4.01
-Release:	1
+Version:	4.00
+Release:	6
 License:	GPL v2+
 Group:		Applications/Publishing
 Source0:	http://www.xpdfreader.com/dl/%{name}-%{version}.tar.gz
@@ -107,7 +107,7 @@ pdffonts, pdfimages) i konwertowania ich do innych formatów (pdftopbm,
 pdftops, pdftotext).
 
 %prep
-%setup -q -n %{name}-4.00
+%setup -q
 %{!?with_protections:%patch0 -p1}
 %patch1 -p1
 %patch2 -p1
@@ -116,9 +116,10 @@ sed -e 's|DESTINATION man/|DESTINATION share/man/|g' -i xpdf{,-qt}/CMakeLists.tx
 %build
 %cmake . \
 	-DA4_PAPER=ON \
-	-DSPLASH_CMYK=ON \
 	-DOPI_SUPPORT=ON \
+	-DSPLASH_CMYK=ON \
 	-DSYSTEM_XPDFRC="%{_sysconfdir}/%{name}rc" \
+	-DXPDFWIDGET_PRINTING=ON \
 	-DCMAKE_DISABLE_FIND_PACKAGE_Qt5Widgets=1 \
 	-DCMAKE_CXX_FLAGS="%{rpmcxxflags}" \
 	-DCMAKE_INSTALL_RPATH="%{_libexecdir}/%{name}" \
