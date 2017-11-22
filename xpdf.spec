@@ -1,9 +1,3 @@
-#
-# TODO:
-#	- separate subpackage with /etc/xpdfrc file; pdftotext
-#	  from xpdf-tools or poppler-progs can use language
-#	  support files but don't require entire xpdf
-#
 # Conditional build:
 %bcond_with	protections	# protections against fair use (printing and copying)
 %bcond_without	x		# X-based browser
@@ -16,9 +10,9 @@ Summary(pt_BR.UTF-8):	Visualizador de arquivos PDF
 Summary(ru.UTF-8):	Программа для просмотра PDF файлов
 Summary(uk.UTF-8):	Програма для перегляду PDF файлів
 Name:		xpdf
-Version:	4.00
-Release:	5
-License:	GPL v2 or GPL v3
+Version:	4.01
+Release:	1
+License:	GPL v2+
 Group:		Applications/Publishing
 Source0:	http://www.xpdfreader.com/dl/%{name}-%{version}.tar.gz
 # Source0-md5:	80c8ce77acf1d36de93cecb82bd64a0f
@@ -87,6 +81,14 @@ Xpdf - це програма для перегляду файлів в форм�
 Format (PDF). Вона швидка й ефективна та використовує стандартні
 шрифти X Window.
 
+%package common
+Summary:	Common xpdf files
+Summary(pl.UTF-8):	Wspólne pliki xpdf
+Group:		Applications/Publishing
+
+%description common
+Private libraries used by xpdf GUI and CLI tools and xpdfrc file.
+
 %package tools
 Summary:	Set of tools for viewing information and converting PDF files
 Summary(pl.UTF-8):	Zestaw narzędzi do wyświetlania informacji i konwertowania plików PDF
@@ -105,7 +107,7 @@ pdffonts, pdfimages) i konwertowania ich do innych formatów (pdftopbm,
 pdftops, pdftotext).
 
 %prep
-%setup -q
+%setup -q -n %{name}-4.00
 %{!?with_protections:%patch0 -p1}
 %patch1 -p1
 %patch2 -p1
@@ -116,6 +118,7 @@ sed -e 's|DESTINATION man/|DESTINATION share/man/|g' -i xpdf{,-qt}/CMakeLists.tx
 	-DA4_PAPER=ON \
 	-DSPLASH_CMYK=ON \
 	-DOPI_SUPPORT=ON \
+	-DSYSTEM_XPDFRC="%{_sysconfdir}/%{name}rc" \
 	-DCMAKE_DISABLE_FIND_PACKAGE_Qt5Widgets=1 \
 	-DCMAKE_CXX_FLAGS="%{rpmcxxflags}" \
 	-DCMAKE_INSTALL_RPATH="%{_libexecdir}/%{name}" \
@@ -148,15 +151,19 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with x}
 %files
 %defattr(644,root,root,755)
-%doc ANNOUNCE CHANGES README
 %attr(755,root,root) %{_bindir}/xpdf
-%config(noreplace,missingok) %verify(not md5 mtime size) %{_sysconfdir}/xpdfrc
-%{_datadir}/xpdf
+%{_desktopdir}/%{name}.desktop
+%{_pixmapsdir}/%{name}.png
 %{_mandir}/man1/xpdf.1*
-%{_mandir}/man5/xpdfrc.5*
-%{_desktopdir}/xpdf.desktop
-%{_pixmapsdir}/xpdf.png
 %endif
+
+%files common
+%doc ANNOUNCE CHANGES README
+%config(noreplace,missingok) %verify(not md5 mtime size) %{_sysconfdir}/%{name}rc
+%dir %{_libexecdir}/%{name}
+%attr(755,root,root) %{_libexecdir}/%{name}/lib*.so
+%{_datadir}/xpdf
+%{_mandir}/man5/xpdfrc.5*
 
 %files tools
 %defattr(644,root,root,755)
@@ -169,8 +176,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/pdftoppm
 %attr(755,root,root) %{_bindir}/pdftops
 %attr(755,root,root) %{_bindir}/pdftotext
-%dir %{_libexecdir}/%{name}
-%attr(755,root,root) %{_libexecdir}/%{name}/lib*.so
 %{_mandir}/man1/pdfdetach.1*
 %{_mandir}/man1/pdffonts.1*
 %{_mandir}/man1/pdfimages.1*
