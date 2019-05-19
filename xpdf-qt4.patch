@@ -1,0 +1,11 @@
+--- xpdf-4.01.01/cmake-config.txt.orig	2019-03-14 22:01:02.000000000 +0100
++++ xpdf-4.01.01/cmake-config.txt	2019-05-19 09:28:12.156006566 +0200
+@@ -193,7 +193,7 @@
+   find_package(Qt5Network)
+   find_package(Qt5PrintSupport)
+ else ()
+-  find_package(Qt4)
++  find_package(Qt4 COMPONENTS QtCore QtGui QtNetwork)
+ endif ()
+ if(Qt5Widgets_FOUND)
+   message(STATUS "Qt5 found")

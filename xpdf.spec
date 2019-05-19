@@ -1,5 +1,7 @@
+#
 # Conditional build:
 %bcond_with	protections	# protections against fair use (printing and copying)
+%bcond_with	qt5		# Qt5 instead of Qt4
 %bcond_without	x		# X-based browser
 
 Summary:	Portable Document Format (PDF) file viewer
@@ -10,28 +12,45 @@ Summary(pt_BR.UTF-8):	Visualizador de arquivos PDF
 Summary(ru.UTF-8):	Программа для просмотра PDF файлов
 Summary(uk.UTF-8):	Програма для перегляду PDF файлів
 Name:		xpdf
-Version:	4.00
-Release:	6
+Version:	4.01.01
+Release:	1
 License:	GPL v2+
 Group:		Applications/Publishing
-Source0:	http://www.xpdfreader.com/dl/%{name}-%{version}.tar.gz
-# Source0-md5:	80c8ce77acf1d36de93cecb82bd64a0f
+#Source0Download: http://www.xpdfreader.com/download.html
+Source0:	https://xpdfreader-dl.s3.amazonaws.com/%{name}-%{version}.tar.gz
+# Source0-md5:	2c07a8c4381eb368be6f3f2149cc0ed1
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}rc
 Patch0:		%{name}-remove_protections.patch
 Patch1:		%{name}-fontdirs.patch
 Patch2:		dynamic_private.patch
+Patch3:		%{name}-qt4.patch
+Patch4:		%{name}-link.patch
 URL:		http://www.xpdfreader.com/
 BuildRequires:	cmake >= 2.8.8
+%{?with_x:BuildRequires:	cups-devel}
 BuildRequires:	freetype-devel >= 2.1.0
 BuildRequires:	libpaper-devel
 BuildRequires:	libpng-devel
 BuildRequires:	libstdc++-devel
-%{?with_x:BuildRequires:	QtCore-devel}
-%{?with_x:BuildRequires:	QtGui-devel}
-%{?with_x:BuildRequires:	qt4-qmake}
-BuildRequires:	rpmbuild(macros) >= 1.596
+BuildRequires:	rpmbuild(macros) >= 1.605
+BuildRequires:	zlib-devel
+%if %{with x}
+%if %{with qt5}
+BuildRequires:	Qt5Core-devel >= 5
+BuildRequires:	Qt5Network-devel >= 5
+BuildRequires:	Qt5PrintSupport-devel >= 5
+BuildRequires:	Qt5Widgets-devel >= 5
+BuildRequires:	qt5-qmake >= 5
+%else
+BuildRequires:	QtCore-devel >= 4
+BuildRequires:	QtGui-devel >= 4
+BuildRequires:	QtNetwork-devel >= 4
+BuildRequires:	qt4-qmake >= 4
+%endif
+%endif
+Requires:	%{name}-common = %{version}-%{release}
 Requires:	desktop-file-utils
 Suggests:	ghostscript-fonts-std
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -89,11 +108,16 @@ Group:		Applications/Publishing
 %description common
 Private libraries used by xpdf GUI and CLI tools and xpdfrc file.
 
+%description common -l pl.UTF-8
+Prywatne biblioteki używane przez graficzny interfejs xpdf oraz
+narzędzia linii poleceń, wraz z plikiem xpdfrc.
+
 %package tools
 Summary:	Set of tools for viewing information and converting PDF files
 Summary(pl.UTF-8):	Zestaw narzędzi do wyświetlania informacji i konwertowania plików PDF
 Group:		Applications/Publishing
 Provides:	pdftops
+Requires:	%{name}-common = %{version}-%{release}
 Obsoletes:	pdftohtml-pdftops
 
 %description tools
@@ -111,30 +135,33 @@ pdftops, pdftotext).
 %{!?with_protections:%patch0 -p1}
 %patch1 -p1
 %patch2 -p1
-sed -e 's|DESTINATION man/|DESTINATION share/man/|g' -i xpdf{,-qt}/CMakeLists.txt
+%patch3 -p1
+%patch4 -p1
 
 %build
-%cmake . \
+install -d build
+cd build
+%cmake .. \
 	-DA4_PAPER=ON \
+	-DCMAKE_CXX_FLAGS="%{rpmcxxflags}" \
+	%{!?with_qt5:-DCMAKE_DISABLE_FIND_PACKAGE_Qt5Widgets=1} \
+	-DCMAKE_EXE_LINKER_FLAGS="-lpaper %{rpmldflags}" \
+	-DCMAKE_INSTALL_RPATH="%{_libdir}/%{name}" \
 	-DOPI_SUPPORT=ON \
 	-DSPLASH_CMYK=ON \
-	-DSYSTEM_XPDFRC="%{_sysconfdir}/%{name}rc" \
+	-DSYSTEM_XPDFRC="%{_sysconfdir}/xpdfrc" \
 	-DXPDFWIDGET_PRINTING=ON \
-	-DCMAKE_DISABLE_FIND_PACKAGE_Qt5Widgets=1 \
-	-DCMAKE_CXX_FLAGS="%{rpmcxxflags}" \
-	-DCMAKE_INSTALL_RPATH="%{_libexecdir}/%{name}" \
-	-DCMAKE_EXE_LINKER_FLAGS="-lpaper %{rpmldflags}"
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_desktopdir},%{_pixmapsdir},{%{_datadir},%{_libexecdir}}/%{name}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir},%{_desktopdir},%{_pixmapsdir},{%{_datadir},%{_libdir}}/%{name}}
 
-%{__make} install \
+%{__make} -C build install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install {fofi/libfofi,goo/libgoo,splash/libsplash}.so $RPM_BUILD_ROOT%{_libexecdir}/%{name}
+install build/{fofi/libfofi,goo/libgoo,splash/libsplash}.so $RPM_BUILD_ROOT%{_libdir}/%{name}
 
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
 cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_pixmapsdir}
@@ -153,16 +180,19 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/xpdf
-%{_desktopdir}/%{name}.desktop
-%{_pixmapsdir}/%{name}.png
+%{_desktopdir}/xpdf.desktop
+%{_pixmapsdir}/xpdf.png
 %{_mandir}/man1/xpdf.1*
 %endif
 
 %files common
+%defattr(644,root,root,755)
 %doc ANNOUNCE CHANGES README
-%config(noreplace,missingok) %verify(not md5 mtime size) %{_sysconfdir}/%{name}rc
-%dir %{_libexecdir}/%{name}
-%attr(755,root,root) %{_libexecdir}/%{name}/lib*.so
+%config(noreplace,missingok) %verify(not md5 mtime size) %{_sysconfdir}/xpdfrc
+%dir %{_libdir}/%{name}
+%attr(755,root,root) %{_libdir}/%{name}/libfofi.so
+%attr(755,root,root) %{_libdir}/%{name}/libgoo.so
+%attr(755,root,root) %{_libdir}/%{name}/libsplash.so
 %{_datadir}/xpdf
 %{_mandir}/man5/xpdfrc.5*
 
