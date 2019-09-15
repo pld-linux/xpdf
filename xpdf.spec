@@ -1,7 +1,7 @@
 #
 # Conditional build:
 %bcond_with	protections	# protections against fair use (printing and copying)
-%bcond_with	qt5		# Qt5 instead of Qt4
+%bcond_without	qt5		# Qt5 instead of Qt4
 %bcond_without	x		# X-based browser
 
 Summary:	Portable Document Format (PDF) file viewer
@@ -13,7 +13,7 @@ Summary(ru.UTF-8):	Программа для просмотра PDF файлов
 Summary(uk.UTF-8):	Програма для перегляду PDF файлів
 Name:		xpdf
 Version:	4.01.01
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Applications/Publishing
 #Source0Download: http://www.xpdfreader.com/download.html
