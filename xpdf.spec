@@ -12,21 +12,20 @@ Summary(pt_BR.UTF-8):	Visualizador de arquivos PDF
 Summary(ru.UTF-8):	Программа для просмотра PDF файлов
 Summary(uk.UTF-8):	Програма для перегляду PDF файлів
 Name:		xpdf
-Version:	4.01.01
-Release:	2
+Version:	4.02
+Release:	1
 License:	GPL v2+
 Group:		Applications/Publishing
 #Source0Download: http://www.xpdfreader.com/download.html
 Source0:	https://xpdfreader-dl.s3.amazonaws.com/%{name}-%{version}.tar.gz
-# Source0-md5:	2c07a8c4381eb368be6f3f2149cc0ed1
+# Source0-md5:	22e0d7940e62c538ccdd75f75dca0acf
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}rc
 Patch0:		%{name}-remove_protections.patch
 Patch1:		%{name}-fontdirs.patch
 Patch2:		dynamic_private.patch
-Patch3:		%{name}-qt4.patch
-Patch4:		%{name}-link.patch
+Patch3:		%{name}-link.patch
 URL:		http://www.xpdfreader.com/
 BuildRequires:	cmake >= 2.8.8
 %{?with_x:BuildRequires:	cups-devel}
@@ -136,7 +135,6 @@ pdftops, pdftotext).
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
 %build
 install -d build
