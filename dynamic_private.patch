@@ -1,20 +1,10 @@
---- xpdf-4.01.01/xpdf-qt/CMakeLists.txt.orig	2019-03-14 22:01:02.000000000 +0100
-+++ xpdf-4.01.01/xpdf-qt/CMakeLists.txt	2019-05-19 07:34:41.876234349 +0200
-@@ -65,9 +65,6 @@
-   endif ()
- 
-   add_executable(xpdf
--    $<TARGET_OBJECTS:goo_objs>
--    $<TARGET_OBJECTS:fofi_objs>
--    $<TARGET_OBJECTS:splash_objs>
-     $<TARGET_OBJECTS:xpdf_objs>
-     $<TARGET_OBJECTS:xpdf_widget_objs>
-     ${XPDFWIDGET_PRINT_MODULES}
-@@ -83,6 +80,7 @@
-     ${XPDF_ICONS}
+--- xpdf-4.06/xpdf-qt/CMakeLists.txt.orig
++++ xpdf-4.06/xpdf-qt/CMakeLists.txt
+@@ -92,6 +92,7 @@
+     ${XPDF_MANIFEST}
    )
    target_link_libraries(xpdf ${QT_LIBRARIES} ${EXTRA_QT_LIBRARIES}
 +                        goo fofi splash
                          ${PAPER_LIBRARY}
                          ${FREETYPE_LIBRARY} ${FREETYPE_OTHER_LIBS}
-                         ${DTYPE_LIBRARY} ${LCMS_LIBRARY}
+                         ${DTYPE_LIBRARY}

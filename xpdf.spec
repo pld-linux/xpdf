@@ -1,7 +1,6 @@
 #
 # Conditional build:
 %bcond_with	protections	# protections against fair use (printing and copying)
-%bcond_without	qt5		# Qt5 instead of Qt4
 %bcond_without	x		# X-based browser
 
 Summary:	Portable Document Format (PDF) file viewer
@@ -12,13 +11,13 @@ Summary(pt_BR.UTF-8):	Visualizador de arquivos PDF
 Summary(ru.UTF-8):	Программа для просмотра PDF файлов
 Summary(uk.UTF-8):	Програма для перегляду PDF файлів
 Name:		xpdf
-Version:	4.02
+Version:	4.06
 Release:	1
 License:	GPL v2+
 Group:		Applications/Publishing
 #Source0Download: http://www.xpdfreader.com/download.html
-Source0:	https://xpdfreader-dl.s3.amazonaws.com/%{name}-%{version}.tar.gz
-# Source0-md5:	22e0d7940e62c538ccdd75f75dca0acf
+Source0:	https://dl.xpdfreader.com/%{name}-%{version}.tar.gz
+# Source0-md5:	ec37e6afba962ccfb9a8e1d8fe83b67f
 Source1:	%{name}.desktop
 Source2:	%{name}.png
 Source3:	%{name}rc
@@ -26,7 +25,7 @@ Patch0:		%{name}-remove_protections.patch
 Patch1:		%{name}-fontdirs.patch
 Patch2:		dynamic_private.patch
 Patch3:		%{name}-link.patch
-URL:		http://www.xpdfreader.com/
+URL:		https://www.xpdfreader.com/
 BuildRequires:	cmake >= 2.8.8
 %{?with_x:BuildRequires:	cups-devel}
 BuildRequires:	freetype-devel >= 2.1.0
@@ -36,18 +35,10 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	rpmbuild(macros) >= 1.605
 BuildRequires:	zlib-devel
 %if %{with x}
-%if %{with qt5}
-BuildRequires:	Qt5Core-devel >= 5
-BuildRequires:	Qt5Network-devel >= 5
-BuildRequires:	Qt5PrintSupport-devel >= 5
-BuildRequires:	Qt5Widgets-devel >= 5
-BuildRequires:	qt5-qmake >= 5
-%else
-BuildRequires:	QtCore-devel >= 4
-BuildRequires:	QtGui-devel >= 4
-BuildRequires:	QtNetwork-devel >= 4
-BuildRequires:	qt4-qmake >= 4
-%endif
+BuildRequires:	Qt6Concurrent-devel >= 6
+BuildRequires:	Qt6Network-devel >= 6
+BuildRequires:	Qt6PrintSupport-devel >= 6
+BuildRequires:	Qt6Widgets-devel >= 6
 %endif
 Requires:	%{name}-common = %{version}-%{release}
 Requires:	desktop-file-utils
@@ -131,7 +122,7 @@ pdftops, pdftotext).
 
 %prep
 %setup -q
-%{!?with_protections:%patch0 -p1}
+%{!?with_protections:%patch 0 -p1}
 %patch -P1 -p1
 %patch -P2 -p1
 %patch -P3 -p1
@@ -142,7 +133,10 @@ cd build
 %cmake .. \
 	-DA4_PAPER=ON \
 	-DCMAKE_CXX_FLAGS="%{rpmcxxflags}" \
-	%{!?with_qt5:-DCMAKE_DISABLE_FIND_PACKAGE_Qt5Widgets=1} \
+	-DCMAKE_DISABLE_FIND_PACKAGE_Qt5Widgets=1 \
+	-DCMAKE_DISABLE_FIND_PACKAGE_Qt5Network=1 \
+	-DCMAKE_DISABLE_FIND_PACKAGE_Qt5Concurrent=1 \
+	-DCMAKE_DISABLE_FIND_PACKAGE_Qt5PrintSupport=1 \
 	-DCMAKE_EXE_LINKER_FLAGS="-lpaper %{rpmldflags}" \
 	-DCMAKE_INSTALL_RPATH="%{_libdir}/%{name}" \
 	-DOPI_SUPPORT=ON \
