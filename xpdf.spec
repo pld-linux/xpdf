@@ -122,7 +122,7 @@ pdftops, pdftotext).
 
 %prep
 %setup -q
-%{!?with_protections:%patch 0 -p1}
+%{!?with_protections:%patch -P0 -p1}
 %patch -P1 -p1
 %patch -P2 -p1
 %patch -P3 -p1
