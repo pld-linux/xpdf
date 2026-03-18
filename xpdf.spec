@@ -26,8 +26,9 @@ Patch1:		%{name}-fontdirs.patch
 Patch2:		dynamic_private.patch
 Patch3:		%{name}-link.patch
 URL:		https://www.xpdfreader.com/
-BuildRequires:	cmake >= 2.8.8
+BuildRequires:	cmake >= 3.10
 %{?with_x:BuildRequires:	cups-devel}
+BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2.1.0
 BuildRequires:	libpaper-devel
 BuildRequires:	libpng-devel
